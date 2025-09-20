@@ -7,7 +7,7 @@ const Layout = () => {
     return (
         <div>
             <Header />
-                <main>
+                <main className="max-w-[1256px] mx-auto my-7 px-14">
                     <Outlet />
                 </main>
             <Footer />
