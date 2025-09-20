@@ -1,0 +1,57 @@
+[
+    {
+        "name": "✔ Status:Done",
+        "color": "0E8A16",
+        "description": "작업 완료"
+    },
+    {
+        "name": "❗Ticket:Bug",
+        "color": "B60205",
+        "description": "버그"
+    },
+    {
+        "name": "⏳ Status:Wait",
+        "color": "009966",
+        "description": "대기"
+    },
+    {
+        "name": "✨ Ticket:Feature",
+        "color": "1D76DB",
+        "description": "기능"
+    },
+    {
+        "name": "🎀 Ticket:Design",
+        "color": "D93F0B",
+        "description": "디자인"
+    },
+    {
+        "name": "📈 Ticket:Improvement",
+        "color": "5319E7",
+        "description": "개선사항"
+    },
+    {
+        "name": "📝 Ticket:Document",
+        "color": "006B75",
+        "description": "문서"
+    },
+    {
+        "name": "📨 Ticket:Request",
+        "color": "0052CC",
+        "description": "요청사항"
+    },
+    {
+        "name": "🧼 Ticket:Refactor",
+        "color": "8A2BE2",
+        "description": "코드정리"
+    },
+    {
+        "name": "🛠 Status:In Progress",
+        "color": "3cb371",
+        "description": "작업 진행 중"
+    },
+    {
+        "name": "🧪 Ticket:Test",
+        "color": "FBCA04",
+        "description": "테스트"
+    }
+]

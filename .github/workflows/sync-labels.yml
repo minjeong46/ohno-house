@@ -1,0 +1,31 @@
+name: Sync GitHub Labels
+
+on:
+    push:
+        paths:
+            - ".github/labels.json" # labels.json이 수정되면 자동 실행
+    workflow_dispatch: # 수동으로도 실행 가능 (GitHub UI에서)
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+    sync-labels:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Install github-label-sync
+              run: npm install -g github-label-sync
+
+            - name: Sync labels to GitHub
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: |
+                  github-label-sync \
+                    --access-token $GITHUB_TOKEN \
+                    --labels .github/labels.json \
+                    ${{ github.repository }}
