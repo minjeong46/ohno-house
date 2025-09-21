@@ -2,8 +2,8 @@ import React from 'react';
 
 const Home = () => {
     return (
-        <div>
-            홈
+        <div className='h-[1000px]'>
+            
         </div>
     );
 };
