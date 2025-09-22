@@ -4,12 +4,12 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
+/* @layer base {
     html {
         font-family: "Pretendard", "Noto Sans KR", sans-serif;
         font-size: 15px;
     }
-}
+} */
 
 @font-face {
     font-family: "Pretendard";
