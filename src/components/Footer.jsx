@@ -1,7 +1,7 @@
 const Footer = () => {
     return (
-        <footer className="border-t">
-            <div className="max-w-[1256px] mx-auto mt-7 px-14">footer</div>;
+        <footer className="max-w-[1256px] border-t">
+            <div className="mx-auto mt-7 px-14">footer</div>
         </footer>
     );
 };

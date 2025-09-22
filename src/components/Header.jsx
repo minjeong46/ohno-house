@@ -86,7 +86,7 @@ const Header = ({ setIsSidebar }) => {
     };
 
     return (
-        <header className="w-full max-w-[1905px] bg-white mx-auto group">
+        <header className="w-full h-[132px] max-w-[1905px] bg-white mx-auto group">
             {/* 상단 */}
             <div className="w-full fixed top-0 left-0 z-40 bg-white border-b">
                 <div className="h-[80px] max-w-[1256px] mx-auto px-14 py-3 flex items-center justify-between">
