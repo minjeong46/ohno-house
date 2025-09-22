@@ -8,7 +8,7 @@ const Layout = () => {
     const [isSidebar, setIsSidebar] = useState(false);
 
     return (
-        <div className="relative">
+        <div className="relative min-h-screen">
             <Header setIsSidebar={setIsSidebar} />
             <main className="max-w-[1256px] mx-auto my-7 px-14">
                 <Outlet />
