@@ -173,6 +173,7 @@ export const categoryProduct = [
         img: categoryProduct4,
         label: "주방용품"
     },
+    
     {
         img: categoryProduct5,
         label: "식품"

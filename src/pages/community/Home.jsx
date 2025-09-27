@@ -15,6 +15,7 @@ const Home = () => {
             <HomeSec4 />
             <HomeSec5 />
             <HomeSec6 />
+            {/* 추가 */}
         </>
     );
 };
