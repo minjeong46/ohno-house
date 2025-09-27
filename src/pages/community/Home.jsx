@@ -1,8 +1,8 @@
 const Home = () => {
     return (
-        <div className='h-[1000px]'>
-            
-        </div>
+          <section className="w-full px-[60px]">
+            <div className="flex w-full h-[1000px]"></div>
+        </section>
     );
 };
 

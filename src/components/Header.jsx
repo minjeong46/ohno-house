@@ -1,18 +1,30 @@
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 const Header = ({ setIsSidebar }) => {
     const [scroll, setScroll] = useState(false);
     const [searchList, setSearchList] = useState(false);
     const [searchInputRemove, setSearchInputRemove] = useState(false);
+    const [isSearchIcon, setIsSearchIcon] = useState(false);
+    const path = useLocation();
+    const [pathShop, setPathShop] = useState(false);
+
+    console.log(path);
 
     useEffect(() => {
         const on = () => {
-            setScroll(window.scrollY >= 81);
+            setScroll(window.scrollY >= 84);
         };
         window.addEventListener("scroll", on);
         return () => window.removeEventListener("scroll", on);
     }, []);
+
+    useEffect(() => {
+        if (path.pathname.indexOf("/shop") !== -1) {
+            console.log(path.pathname.indexOf("/shop"));
+            setPathShop(true);
+        } else setPathShop(false);
+    }, [path]);
 
     const navLinkPath = [
         {
@@ -66,6 +78,49 @@ const Header = ({ setIsSidebar }) => {
             path: "/none",
             name: "집사진",
         },
+        {
+            path: "/none",
+            name: "3D인테리어",
+        },
+    ];
+
+    const tabShopLinkPath = [
+        {
+            path: "/shop",
+            name: "쇼핑홈",
+        },
+        {
+            path: "/none",
+            name: "카테고리",
+        },
+        {
+            path: "/none",
+            name: "베스트",
+        },
+        {
+            path: "/none",
+            name: "오늘의딜",
+        },
+        {
+            path: "/none",
+            name: "단독상품",
+        },
+        {
+            path: "/none",
+            name: "오마트",
+        },
+        {
+            path: "/none",
+            name: "원하는날도착",
+        },
+        {
+            path: "/none",
+            name: "오!쇼룸",
+        },
+        {
+            path: "/none",
+            name: "기획전",
+        },
     ];
 
     const searchClickHandler = () => {
@@ -80,30 +135,64 @@ const Header = ({ setIsSidebar }) => {
         const value = e.target.value;
         if (value.trim().length >= 1) {
             setSearchInputRemove(true);
-        }else {
+        } else {
             setSearchInputRemove(false);
         }
     };
 
     return (
-        <header className="w-full h-[132px] max-w-[1905px] bg-white mx-auto group">
+        <header className="bg-white mx-auto group">
             {/* 상단 */}
             <div className="w-full fixed top-0 left-0 z-40 bg-white border-b">
-                <div className="h-[80px] max-w-[1256px] mx-auto px-14 py-3 flex items-center justify-between">
+                <div className="max-w-[1256px] mx-auto px-14 py-[0.625rem] flex items-center justify-between">
                     {/* 왼쪽 */}
-                    <div className="flex items-center pr-14">
+                    <div className="flex items-center">
                         {/* 로고 */}
                         <div className="mr-5 p-1">
                             <a href="/">
-                                <img src="../../public/logo.svg" />
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="71"
+                                    height="28"
+                                    fill="none"
+                                    class="css-40f4ru"
+                                >
+                                    <path
+                                        fill="#2F3438"
+                                        d="M19.711 7.307h10.226c.759 0 1.374-.606 1.374-1.355s-.615-1.356-1.374-1.356h-8.852v-3.24C21.085.607 20.47 0 19.71 0c-.759 0-1.374.607-1.374 1.356v4.596c0 .749.615 1.355 1.374 1.355Z"
+                                    ></path>
+                                    <path
+                                        fill="#2F3438"
+                                        fill-rule="evenodd"
+                                        d="M13.804 8.877c0 4.711-2.261 7.638-5.9 7.638s-5.901-2.927-5.901-7.638V8.54c0-4.711 2.26-7.638 5.9-7.638s5.9 2.927 5.9 7.638zm-5.9-5.264c-1.178 0-3.153.64-3.153 4.927v.337c0 4.287 1.975 4.927 3.152 4.927s3.153-.64 3.153-4.927V8.54c0-4.287-1.975-4.927-3.153-4.927Z"
+                                        clip-rule="evenodd"
+                                    ></path>
+                                    <path
+                                        fill="#2F3438"
+                                        d="M9.278 23.496h4.655c.76 0 1.374.607 1.374 1.356 0 .748-.615 1.355-1.374 1.355H1.873A1.365 1.365 0 0 1 .5 24.852c0-.75.615-1.356 1.374-1.356H6.53v-4.173c0-.748.615-1.355 1.374-1.355.758 0 1.374.607 1.374 1.355zm22.79-13.84H17.343c-.759 0-1.373.607-1.373 1.355 0 .75.614 1.356 1.373 1.356h14.725c.76 0 1.374-.607 1.374-1.356 0-.748-.615-1.355-1.374-1.355M21.009 24.362c.654.499 2.897 1.475 9.59-.24a1.376 1.376 0 0 1 1.675.97 1.354 1.354 0 0 1-.984 1.653c-2.745.704-5.095 1.055-7.035 1.056-2.15 0-3.797-.432-4.927-1.294-1.103-.843-1.686-2.063-1.686-3.532v-2.163c0-.748.614-1.356 1.373-1.356h9.703v-2.03h-9.703a1.365 1.365 0 0 1-1.373-1.355c0-.749.614-1.356 1.373-1.356h11.077c.759 0 1.373.607 1.373 1.356v4.741c0 .749-.614 1.356-1.373 1.356h-9.703v.807c0 .632.191 1.06.62 1.387M68.135 0a1.41 1.41 0 0 0-1.419 1.4v11.2c0 .773.636 1.4 1.42 1.4a1.41 1.41 0 0 0 1.418-1.4V1.4c0-.773-.635-1.4-1.419-1.4m-6.624 12.39a1.374 1.374 0 0 0 1.759.808 1.35 1.35 0 0 0 .823-1.737c-.045-.12-.944-2.5-3.191-4.195l3.49-3.83c.362-.398.454-.97.233-1.458a1.38 1.38 0 0 0-1.255-.804h-8.56c-.759 0-1.374.607-1.374 1.356 0 .748.615 1.355 1.374 1.355h5.477l-6.499 7.132a1.34 1.34 0 0 0 .103 1.914c.263.233.591.348.919.348.376 0 .75-.152 1.022-.45l3.224-3.538c1.706 1.19 2.437 3.054 2.454 3.1Z"
+                                    ></path>
+                                    <path
+                                        fill="#2F3438"
+                                        fill-rule="evenodd"
+                                        d="M67.072 17.362c0-.749.615-1.356 1.374-1.356s1.374.607 1.374 1.356v6.627c0 1.914-1.579 3.471-3.519 3.471h-6.634c-1.94 0-3.519-1.557-3.519-3.471v-6.627c0-.749.615-1.356 1.374-1.356s1.374.607 1.374 1.356v2.095h8.176zm-7.405 7.387h6.634c.425 0 .771-.34.771-.76v-1.821h-8.176v1.82c0 .42.346.761.771.761m-18.999-8.935c1.664 0 3.052-.87 3.91-2.452.678-1.252 1.037-2.982 1.037-5.004s-.359-3.752-1.038-5.004C43.72 1.772 42.332.902 40.668.902s-3.052.87-3.91 2.452c-.678 1.252-1.037 2.982-1.037 5.004s.359 3.752 1.038 5.004c.857 1.581 2.245 2.452 3.909 2.452m0-12.201c2.093 0 2.2 3.952 2.2 4.745 0 .792-.107 4.745-2.2 4.745s-2.2-3.953-2.2-4.745.106-4.745 2.2-4.745"
+                                        clip-rule="evenodd"
+                                    ></path>
+                                    <path
+                                        fill="#2F3438"
+                                        d="M47.746 1.81c0-.748.615-1.355 1.374-1.355s1.374.607 1.374 1.356V25.73c0 .749-.615 1.355-1.374 1.355a1.365 1.365 0 0 1-1.374-1.355v-4.514c-2.992.733-7.314.95-9.812.95h-2.091a1.365 1.365 0 0 1-1.374-1.355c0-.749.615-1.356 1.374-1.356h2.091c4.378 0 7.991-.493 9.812-1.052z"
+                                    ></path>
+                                </svg>
                             </a>
                         </div>
                         {/* nav */}
                         <nav>
-                            <ul className="flex font-bold cursor-pointer">
+                            <ul className="flex font-bold cursor-pointer whitespace-nowrap">
                                 {navLinkPath.map((nav, index) => {
                                     return (
-                                        <li className="mx-3 pt-5 pb-4 px-1" key={`${index}-${nav.name}`}>
+                                        <li
+                                            className="mx-3 pt-5 pb-4 px-1"
+                                            key={`${index}-${nav.name}`}
+                                        >
                                             <NavLink
                                                 to={nav.path}
                                                 className={({ isActive }) =>
@@ -127,7 +216,7 @@ const Header = ({ setIsSidebar }) => {
                     {/* 오른쪽 */}
                     <div className="flex items-center justify-end">
                         {/* 검색창 */}
-                        <div className="xl:w-80 w-52 h-[40px] border rounded-md px-3 xl:mr-7 mr-2 relative">
+                        <div className="xl:w-80 w-52 border rounded-md px-3 py-2 xl:mr-4 mr-2 relative">
                             <div className="h-full flex items-center">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -158,7 +247,7 @@ const Header = ({ setIsSidebar }) => {
                                         viewBox="0 0 24 24"
                                         strokeWidth="1.5"
                                         stroke="white"
-                                        className="w-8 h-8"
+                                        className="w-8 h-8 cursor-pointer"
                                     >
                                         <path
                                             strokeLinecap="round"
@@ -222,6 +311,54 @@ const Header = ({ setIsSidebar }) => {
                         {/* 아이콘 */}
                         <div className="flex items-center pr-4">
                             <div className="flex">
+                                <div className="flex">
+                                    {isSearchIcon && (
+                                        <a className="p-2">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                className="w-7 h-7 text-gray-600 hover:text-[#11A5FD] cursor-pointer"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                                stroke="currentColor"
+                                            >
+                                                <path
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    strokeWidth={1.5}
+                                                    d="m21 21-5.2-5.2M16 10.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0Z"
+                                                />
+                                            </svg>
+                                        </a>
+                                    )}
+
+                                    <a className="p-2">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            className="w-7 h-7 text-gray-600 hover:text-[#11A5FD] cursor-pointer"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            strokeWidth="1"
+                                            stroke="currentColor"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"
+                                            />
+                                        </svg>
+                                    </a>
+                                </div>
+                                <div className="text-gray-600 text-sm flex items-center whitespace-nowrap cursor-pointer">
+                                    <span className="px-2 border-r">
+                                        로그인
+                                    </span>
+                                    <span className="px-2 border-r">
+                                        회원가입
+                                    </span>
+                                    <span className="px-2">고객센터</span>
+                                </div>
+                            </div>
+                            {/* <div className="flex">
                                 <a href="/" className="p-2">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -274,11 +411,13 @@ const Header = ({ setIsSidebar }) => {
                             </div>
                             <div className="m-4">
                                 <div className="w-9 h-9 rounded-2xl border"></div>
-                            </div>
+                            </div> */}
                         </div>
                         {/* 버튼 */}
-                        <button className="h-[40px] bg-[#11A5FD] py-2 px-4 text-[14px] text-white rounded-md flex items-center">
-                            <span className="pr-1">글쓰기</span>
+                        <button className="h-[40px] bg-[#11A5FD] py-2 px-3 text-[14px] text-white rounded-md flex items-center hover:">
+                            <span className="pr-1 whitespace-nowrap">
+                                글쓰기
+                            </span>
                             <i>
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -302,7 +441,7 @@ const Header = ({ setIsSidebar }) => {
             {/* 하단 */}
             <div
                 className={`
-                    fixed top-[80px] left-0 w-full z-30 bg-white border transition-transform duration-300
+                    fixed top-[84px] left-0 w-full z-30 bg-white border transition-transform duration-300
                      ${
                          scroll
                              ? "-translate-y-full group-hover:translate-y-0"
@@ -310,29 +449,56 @@ const Header = ({ setIsSidebar }) => {
                      }
                 `}
             >
-                <div className="h-[51px] max-w-[1256px] mx-auto px-14 flex items-center justify-between sticky">
-                    <nav className="h-full flex flex-grow flex-shrink-0">
-                        <div className="h-full flex">
-                            {tabLinkPath.map((tab,index) => {
-                                return (
-                                    <div className="flex items-center h-full mx-2 relative" key={`${index}-${tab.name}`}>
-                                        <NavLink
-                                            to={tab.path}
-                                            className={({ isActive }) =>
-                                                `p-1 px-1 hover:text-[#11A5FD] ${
-                                                    isActive
-                                                        ? "text-[#11A5FD] before:absolute before:w-full before:h-[2px] before:bg-[#11A5FD] before:bottom-0 before:right-0"
-                                                        : "text-gray-700"
-                                                }`
-                                            }
-                                        >
-                                            <span className="text-[16px] font-bold leading-5">
-                                                {tab.name}
-                                            </span>
-                                        </NavLink>
-                                    </div>
-                                );
-                            })}
+                <div className="max-w-[1256px] px-10 mx-auto md:px-14 flex items-center justify-between sticky">
+                    <nav className="flex flex-grow flex-shrink-0">
+                        <div className="flex">
+                            {pathShop
+                                ? tabShopLinkPath.map((tab, index) => {
+                                      return (
+                                          <div
+                                              className="flex items-center mx-1 relative"
+                                              key={`${index}-${tab.name}`}
+                                          >
+                                              <NavLink
+                                                  to={tab.path}
+                                                  className={({ isActive }) =>
+                                                      `py-3 px-[6px] hover:text-[#11A5FD] ${
+                                                          isActive
+                                                              ? "text-[#11A5FD] before:absolute before:w-full before:h-[2px] before:bg-[#11A5FD] before:bottom-0 before:right-0"
+                                                              : "text-gray-700"
+                                                      }`
+                                                  }
+                                              >
+                                                  <span className="text-[16px] font-bold leading-5">
+                                                      {tab.name}
+                                                  </span>
+                                              </NavLink>
+                                          </div>
+                                      );
+                                  })
+                                : tabLinkPath.map((tab, index) => {
+                                      return (
+                                          <div
+                                              className="flex items-center h-full mx-1 relative"
+                                              key={`${index}-${tab.name}`}
+                                          >
+                                              <NavLink
+                                                  to={tab.path}
+                                                  className={({ isActive }) =>
+                                                      `py-3 px-[6px] hover:text-[#11A5FD] ${
+                                                          isActive
+                                                              ? "text-[#11A5FD] before:absolute before:w-full before:h-[2px] before:bg-[#11A5FD] before:bottom-0 before:right-0"
+                                                              : "text-gray-700"
+                                                      }`
+                                                  }
+                                              >
+                                                  <span className="text-[16px] font-bold leading-5">
+                                                      {tab.name}
+                                                  </span>
+                                              </NavLink>
+                                          </div>
+                                      );
+                                  })}
                         </div>
                     </nav>
                     {/* 인기 검색어 */}
