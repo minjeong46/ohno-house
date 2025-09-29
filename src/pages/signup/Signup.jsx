@@ -1,4 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { login } from '../../store/userSlice';
+import Logo from '../../assets/ohno_logo.svg'
 
 const Signup = () => {
   const [isDirectInput, setIsDirectInput] = useState(false);
@@ -30,6 +34,8 @@ const Signup = () => {
   const confirmPasswordRef = useRef(null);
   const nicknameRef = useRef(null);
   const termsRef = useRef(null);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   /* 이메일란 직접입력 확인 */
   const handleClearInput = () => {
@@ -172,22 +178,14 @@ const Signup = () => {
 
   /* 전체 유효성 검사 및 제출 핸들러 */
   const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // 1. 모든 필드를 'touched' 상태로 강제 설정하여 최신 에러 메시지를 표시합니다.
+    e.preventDefault(); // 모든 필드를 '건드림' 상태로 설정하여 useEffect를 통해 에러 메시지 표시를 강제
     setEmailTouched(true);
-    setDomainTouched(true); // 이메일 도메인 필드도 확인
+    setDomainTouched(true);
     setPasswordTouched(true);
     setConfirmPasswordTouched(true);
     setNicknameTouched(true);
-    setTermsTouched(true);
+    setTermsTouched(true); // 1. 유효성 검사에 필요한 값들을 먼저 계산하고 변수에 저장합니다.
 
-    // useEffect가 한 번 더 실행되어 최신 에러 상태를 업데이트할 시간을 줍니다.
-    // 하지만, 제출 로직은 동기적으로 실행되어야 하므로,
-    // 현재의 에러 상태를 기반으로 유효성 검사를 수동으로 다시 확인합니다.
-
-    // 2. 최종 에러 상태 확인 및 스크롤 위치 결정
-    // 이메일 도메인 부분 결정 로직을 다시 실행
     let domainPart = '';
     if (isDirectInput) {
       domainPart = directInputValue;
@@ -196,23 +194,16 @@ const Signup = () => {
     }
     const fullEmail = `${emailLocalPart}@${domainPart}`;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$/;
-
-    // A. 이메일 검사
-    const isEmailValid =
-      emailLocalPart && domainPart && emailRegex.test(fullEmail);
-    // B. 비밀번호 검사 (변수 선언 삭제)
-    // const isPasswordValid = passwordRegex.test(password) && password === confirmPassword;
-    // 변수 없이 바로 다음의 개별 if 문으로 유효성 검사를 진행합니다.
-    // C. 닉네임 검사
-    const isNicknameValid =
-      nickname.trim().length >= 2 && nickname.trim().length <= 20;
-    // D. 약관 검사 (필수 항목만)
+    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$/; // areTermsValid를 여기서 먼저 선언하고 초기화합니다.
     const areTermsValid = ageTerm && termsOfUse;
 
-    // 3. 유효성 검사에 실패한 경우, 해당 섹션으로 스크롤 이동
+    const isEmailValid =
+      emailLocalPart && domainPart && emailRegex.test(fullEmail);
+    const isNicknameValid =
+      nickname.trim().length >= 2 && nickname.trim().length <= 20; // 2. 유효성 검사를 순서대로 진행하며 에러 발생 시 해당 필드로 포커스 이동
+
     if (!isEmailValid) {
-      emailRef.current?.focus(); // 포커스가 가능한 필드에 포커스
+      emailRef.current?.focus();
       emailRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
     }
@@ -239,13 +230,12 @@ const Signup = () => {
         block: 'center',
       });
       return;
-    }
+    } // areTermsValid는 이제 정의되었으므로 문제 없이 사용 가능
     if (!areTermsValid) {
       termsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
-    }
+    } // 3. 모든 유효성 검사 통과 후 데이터 제출 처리
 
-    // 4. 모든 유효성 검사를 통과한 경우 (서버 저장 로직 대신 임시 저장 및 이동)
     const userData = {
       email: fullEmail,
       nickname: nickname,
@@ -255,23 +245,21 @@ const Signup = () => {
         marketingInfo,
         eventSms,
       },
+      id: Date.now().toString(),
     };
-
-    console.log('✅ 회원가입 성공! (임시 데이터 저장):', userData);
-
-    // 5. 루트 페이지로 이동 (실제 환경에서는 react-router-dom의 useNavigate를 사용)
-    window.location.href = '/';
+    dispatch(login(userData));
+    console.log('✅ 회원가입 성공! :', userData);
+    navigate('/');
   };
 
   return (
     <>
-      <header className="w-[90px] h-50 flex justify-first m-4 mt-[40px]">
+      <header className="w-[80px] h-50 m-4 mt-[40px]">
         <a href="/">
-          <img src="../../public/icon+logo.svg" alt="로고" />
+          <img src={Logo} alt="로고" />
         </a>
       </header>
       <div className="w-full flex items-center justify-center mt-[60px] mb-[60px]">
-        {/* ⭐️ form 태그 사용 및 onSubmit 핸들러 연결 */}
         <form className="max-w-md w-[360px] bg-white" onSubmit={handleSubmit}>
           <h2 className="text-xl font-bold mb-6 text-gray-700">회원가입</h2>
 
@@ -315,7 +303,7 @@ const Signup = () => {
                       }`}
                     />
                     <button
-                      type="button" // ⭐️ 버튼이 폼 제출을 막도록 type="button" 추가
+                      type="button"
                       onClick={handleClearInput}
                       className="lowercase absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
                     >
@@ -324,7 +312,6 @@ const Signup = () => {
                   </div>
                 ) : (
                   <select
-                    // ref는 select에는 연결하지 않고, 대표 요소인 이메일 input에만 연결하여 스크롤 위치를 잡음
                     className={`w-[170px] h-10 text-sm pl-3 p-1 border rounded-md focus:outline-none focus:ring-1
                       ${
                         selectedValue === '선택해주세요'
@@ -338,12 +325,12 @@ const Signup = () => {
                       }`}
                     onChange={(e) => {
                       setSelectedValue(e.target.value);
-                      setDomainTouched(true); // ⭐️ select 변경 시 domainTouched 설정
+                      setDomainTouched(true);
                       if (e.target.value === '직접입력') {
                         setIsDirectInput(true);
                       } else {
                         setIsDirectInput(false);
-                        setDirectInputValue(''); // 도메인 선택 시 직접 입력 값 초기화
+                        setDirectInputValue('');
                       }
                     }}
                   >
@@ -543,7 +530,6 @@ const Signup = () => {
                   </div>
                 </div>
 
-                {/* 이벤트, 쿠폰, 특가 알림 (선택) */}
                 <div className="flex items-center space-x-2">
                   <input
                     type="checkbox"
@@ -564,7 +550,6 @@ const Signup = () => {
             )}
           </div>
 
-          {/* 회원가입하기 버튼 */}
           <button
             type="submit"
             className="text-m w-full h-12 p-2 text-white text-lg font-bold bg-[#35C5F0] rounded-md hover:bg-[#11A5FD] transition-colors"
@@ -572,11 +557,10 @@ const Signup = () => {
             회원가입하기
           </button>
 
-          {/* 로그인 링크 */}
           <div className="text-center mt-4">
             <p className="text-sm text-black">
               이미 아이디가 있으신가요?
-              <a href="/" className="font-bold underline pl-2">
+              <a href="/login" className="font-bold underline pl-2">
                 로그인
               </a>
             </p>
