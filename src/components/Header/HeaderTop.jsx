@@ -78,10 +78,10 @@ const HeaderTop = ({
                             </div>
                             <div className="text-gray-600 text-sm flex items-center whitespace-nowrap cursor-pointer">
                                 <span className="px-2 border-r">
-                                    <a href="/">로그인</a>
+                                    <a href="/login">로그인</a>
                                 </span>
                                 <span className="px-2 border-0 xl:border-r">
-                                    <a href="/">회원가입</a>
+                                    <a href="/sign">회원가입</a>
                                 </span>
                                 <span className="px-2 hidden xl:block">
                                     <a href="/">고객센터</a>
