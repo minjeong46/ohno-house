@@ -7,6 +7,7 @@ import {
     ShoppingCartIcon,
     ChevronDownIcon,
 } from "@heroicons/react/24/outline";
+import { useSelector } from 'react-redux'; //리듀서 연결
 
 const HeaderTop = ({
     searchInputRef,
@@ -57,6 +58,23 @@ const HeaderTop = ({
                             })}
                         </ul>
                     </nav>
+  const user = useSelector((state) => state.user.userData); // userSlice에 userData 정보를 가져옴
+  const isLoggedIn = !!user;
+  const handleLogout = (e) => {
+    e.preventDefault();
+    console.log('로그아웃 기능 실행 (Redux dispatch 필요)');
+  };
+              {!isLoggedIn ? (
+                <div className="text-gray-600 text-sm flex items-center whitespace-nowrap cursor-pointer">
+                  <span className="px-2 border-r">
+                    <a href="/login">로그인</a>
+                  </span>
+                  <span className="px-2 border-0 xl:border-r">
+                    <a href="/sign">회원가입</a>
+                  </span>
+                  <span className="px-2 hidden xl:block">
+                    <a href="/">고객센터</a>
+                  </span>
                 </div>
                 {/* 오른쪽 */}
                 <div className="flex items-center justify-end">
@@ -76,18 +94,6 @@ const HeaderTop = ({
                                     <ShoppingCartIcon className="w-6 h-6 text-gray-700 hover:text-[#11A5FD] cursor-pointer" />
                                 </a>
                             </div>
-                            <div className="text-gray-600 text-sm flex items-center whitespace-nowrap cursor-pointer">
-                                <span className="px-2 border-r">
-                                    <a href="/login">로그인</a>
-                                </span>
-                                <span className="px-2 border-0 xl:border-r">
-                                    <a href="/sign">회원가입</a>
-                                </span>
-                                <span className="px-2 hidden xl:block">
-                                    <a href="/">고객센터</a>
-                                </span>
-                            </div>
-                        </div>
                         {/* 로그인 시 아이콘 변동 */}
                     </div>
                     <button className=" bg-[#11A5FD] py-2 px-4 text-[14px] text-white rounded-md flex items-center hover:bg-[#0198ED]">
@@ -96,7 +102,19 @@ const HeaderTop = ({
                             <ChevronDownIcon className="h-5 w-5 text-white hidden lg:block" />
                         </i>
                     </button>
+              ) : (
+                // 로그인되었을 때: 마이페이지/로그아웃 링크
+                <div className="text-gray-600 text-sm flex items-center whitespace-nowrap cursor-pointer">
+                  <span className="px-2 border-r font-bold text-gray-800">
+                    {user.nickname || '회원'}님
+                  </span>
+                  <span className="px-2 hidden xl:block">
+                    <a href="#" onClick={handleLogout}>
+                      로그아웃
+                    </a>
+                  </span>
                 </div>
+              )}
             </div>
         </div>
     );
