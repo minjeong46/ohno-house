@@ -1,0 +1,105 @@
+import { navLinkPath } from "../../data/navData.js";
+import logo from "../../../public/logo.svg";
+import { NavLink } from "react-router-dom";
+import SearchInput from "../Header/SearchInput.jsx";
+import {
+    MagnifyingGlassIcon,
+    ShoppingCartIcon,
+    ChevronDownIcon,
+} from "@heroicons/react/24/outline";
+
+const HeaderTop = ({
+    searchInputRef,
+    dispatchSearch,
+    searchState,
+    clearClickHandler,
+}) => {
+    return (
+        <div className="w-full h-header-top fixed top-0 left-0 z-40 bg-white border-b">
+            <div className="max-w-[1256px] mx-auto px-10 lg:px-14 py-[0.625rem] flex items-center justify-between">
+                {/* 왼쪽 */}
+                <div className="flex items-center">
+                    {/* 로고 */}
+                    <div className="mr-5 p-1">
+                        <a href="/">
+                            <img
+                                src={logo}
+                                alt="로고"
+                                className="w-[71px] h-[28px]"
+                            />
+                        </a>
+                    </div>
+                    {/* nav */}
+                    <nav>
+                        <ul className="flex font-bold cursor-pointer whitespace-nowrap">
+                            {navLinkPath.map((nav, index) => {
+                                return (
+                                    <li
+                                        className="mx-3 pt-5 pb-4 px-1"
+                                        key={`${index}-${nav.name}`}
+                                    >
+                                        <NavLink
+                                            to={nav.path}
+                                            className={({ isActive }) =>
+                                                `hover:text-[#11A5FD] ${
+                                                    isActive
+                                                        ? "text-[#11A5FD] font-bold"
+                                                        : "text-gray-700"
+                                                }`
+                                            }
+                                        >
+                                            <span className="text-lg">
+                                                {nav.name}
+                                            </span>
+                                        </NavLink>
+                                    </li>
+                                );
+                            })}
+                        </ul>
+                    </nav>
+                </div>
+                {/* 오른쪽 */}
+                <div className="flex items-center justify-end">
+                    <SearchInput
+                        searchInputRef={searchInputRef}
+                        dispatchSearch={dispatchSearch}
+                        searchState={searchState}
+                        clearClickHandler={clearClickHandler}
+                    />
+                    <div className="flex items-center pr-4">
+                        <div className="flex">
+                            <div className="flex">
+                                <a className="p-2 block lg:hidden">
+                                    <MagnifyingGlassIcon className="w-6 h-6 text-gray-700 hover:text-[#11A5FD] cursor-pointer" />
+                                </a>
+                                <a className="p-2">
+                                    <ShoppingCartIcon className="w-6 h-6 text-gray-700 hover:text-[#11A5FD] cursor-pointer" />
+                                </a>
+                            </div>
+                            <div className="text-gray-600 text-sm flex items-center whitespace-nowrap cursor-pointer">
+                                <span className="px-2 border-r">
+                                    <a href="/">로그인</a>
+                                </span>
+                                <span className="px-2 border-0 xl:border-r">
+                                    <a href="/">회원가입</a>
+                                </span>
+                                <span className="px-2 hidden xl:block">
+                                    <a href="/">고객센터</a>
+                                </span>
+                            </div>
+                        </div>
+                        {/* 로그인 시 아이콘 변동 */}
+                    </div>
+                    <button className=" bg-[#11A5FD] py-2 px-4 text-[14px] text-white rounded-md flex items-center hover:bg-[#0198ED]">
+                        <span className="pr-1 whitespace-nowrap">글쓰기</span>
+                        <i>
+                            <ChevronDownIcon className="h-5 w-5 text-white hidden lg:block" />
+                        </i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default HeaderTop;
