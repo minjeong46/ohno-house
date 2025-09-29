@@ -8,13 +8,13 @@ const Layout = () => {
     const [isSidebar, setIsSidebar] = useState(false);
 
     return (
-        <div className="w-screen h-screen">
+        <div className="w-screen h-screen relative">
             <Header setIsSidebar={setIsSidebar} />
-            <main className="max-w-[1256px] mx-auto my-7">
+            <main className="max-w-[1256px] mx-auto my-7 ">
                 <Outlet />
             </main>
             <Footer />
-            {isSidebar && <Sidebar setIsSidebar={setIsSidebar}/>}
+            {isSidebar && <Sidebar setIsSidebar={setIsSidebar} />}
         </div>
     );
 };
