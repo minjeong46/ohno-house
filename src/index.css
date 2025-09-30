@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -12,73 +12,111 @@
 } */
 
 @font-face {
-    font-family: "Pretendard";
-    src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Thin.woff")
-        format("woff");
-    font-weight: 100;
-    font-display: swap;
+  font-family: 'Pretendard';
+  src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Thin.woff')
+    format('woff');
+  font-weight: 100;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: "Pretendard";
-    src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-ExtraLight.woff")
-        format("woff");
-    font-weight: 200;
-    font-display: swap;
+  font-family: 'Pretendard';
+  src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-ExtraLight.woff')
+    format('woff');
+  font-weight: 200;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: "Pretendard";
-    src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Light.woff")
-        format("woff");
-    font-weight: 300;
-    font-display: swap;
+  font-family: 'Pretendard';
+  src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Light.woff')
+    format('woff');
+  font-weight: 300;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: "Pretendard";
-    src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
-        format("woff");
-    font-weight: 400;
-    font-display: swap;
+  font-family: 'Pretendard';
+  src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff')
+    format('woff');
+  font-weight: 400;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: "Pretendard";
-    src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Medium.woff")
-        format("woff");
-    font-weight: 500;
-    font-display: swap;
+  font-family: 'Pretendard';
+  src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Medium.woff')
+    format('woff');
+  font-weight: 500;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: "Pretendard";
-    src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-SemiBold.woff")
-        format("woff");
-    font-weight: 600;
-    font-display: swap;
+  font-family: 'Pretendard';
+  src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-SemiBold.woff')
+    format('woff');
+  font-weight: 600;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: "Pretendard";
-    src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff")
-        format("woff");
-    font-weight: 700;
-    font-display: swap;
+  font-family: 'Pretendard';
+  src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff')
+    format('woff');
+  font-weight: 700;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: "Pretendard";
-    src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-ExtraBold.woff")
-        format("woff");
-    font-weight: 800;
-    font-display: swap;
+  font-family: 'Pretendard';
+  src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-ExtraBold.woff')
+    format('woff');
+  font-weight: 800;
+  font-display: swap;
 }
 
 @font-face {
-    font-family: "Pretendard";
-    src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Black.woff")
-        format("woff");
-    font-weight: 900;
-    font-display: swap;
+  font-family: 'Pretendard';
+  src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Black.woff')
+    format('woff');
+  font-weight: 900;
+  font-display: swap;
 }
+
+/* -- Login Page 에서 사용 (높이 기준 486px) -------------------------------------- */
+
+/* 1. 콘텐츠 아래 붙는 카피라이트 (.hide-on-486) */
+
+/* 486px 미만: 기본적으로 표시 (별도의 @media 없음) */
+.hide-on-486 {
+  display: block;
+}
+
+/* 숨김 (min-height 사용) */
+@media (min-height: 530px) {
+  .hide-on-486 {
+    display: none !important;
+  }
+}
+
+/* ------------------------------------------------------------------------------------ */
+
+/* 2. Fixed로 창 하단에 붙는 카피라이트 (.show-fixed-on-486) */
+
+/* 486px 미만: 기본적으로 숨김 */
+.show-fixed-on-486 {
+  display: none !important;
+}
+
+/* Fixed로 표시 (min-height 사용) */
+@media (min-height: 530px) {
+  .show-fixed-on-486 {
+    display: block !important;
+    position: fixed;
+    bottom: 24px; /* Tailwind bottom-8 */
+    left: 0;
+    right: 0; /* Tailwind inset-x-0 */
+    z-index: 0; /* z-0 */
+  }
+}
+/* ------------------------------------------------------------------------------------ */
