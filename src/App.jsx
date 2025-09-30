@@ -3,6 +3,7 @@ import Layout from './components/Layout';
 import Home from './pages/community/Home';
 import Sign from './pages/signup/Signup';
 import Login from './pages/login/Login';
+import PasswordReset from './pages/login/ResetLayout';
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
   {
     path: '/login',
     element: <Login />,
+  },
+  {
+    path: '/password-reset',
+    element: <PasswordReset/>,
   },
 ]);
 
