@@ -7,7 +7,9 @@ import {
   ShoppingCartIcon,
   ChevronDownIcon,
 } from '@heroicons/react/24/outline';
-import { useSelector } from 'react-redux'; //리듀서 연결
+import { useSelector, useDispatch } from 'react-redux'; //리듀서 연결
+import { useNavigate } from 'react-router-dom';
+import { logout } from '../../store/userSlice';
 
 const HeaderTop = ({
   searchInputRef,
@@ -15,11 +17,15 @@ const HeaderTop = ({
   searchState,
   clearClickHandler,
 }) => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
   const user = useSelector((state) => state.user.userData); // userSlice에 userData 정보를 가져옴
   const isLoggedIn = !!user;
   const handleLogout = (e) => {
     e.preventDefault();
-    console.log('로그아웃 기능 실행 (Redux dispatch 필요)');
+      dispatch(logout()); 
+      navigate('/'); 
   };
 
   return (
