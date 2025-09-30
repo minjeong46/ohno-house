@@ -1,10 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../../store/userSlice';
-import Logo from '../../assets/ohno_logo.svg'
+import { registerUser } from '../../store/usersSlice';
+import Logo from '../../assets/ohno_logo.svg';
 
 const Signup = () => {
+  const allUsers = useSelector((state) => state.users.allUsers) || [];
+  const loginUser = useSelector((state) => state.userAuth?.loginUser);
   const [isDirectInput, setIsDirectInput] = useState(false);
   const [directInputValue, setDirectInputValue] = useState('');
   const [selectedValue, setSelectedValue] = useState('선택해주세요');
@@ -27,6 +30,7 @@ const Signup = () => {
   const [eventSms, setEventSms] = useState(false);
   const [termsError, setTermsError] = useState('');
   const [termsTouched, setTermsTouched] = useState(false);
+  const [isSubmittedSuccessfully, setIsSubmittedSuccessfully] = useState(false);
 
   // Ref 생성: 각 입력 필드를 참조하기 위함
   const emailRef = useRef(null);
@@ -62,6 +66,8 @@ const Signup = () => {
 
   /* 이메일 유효성 검사 */
   useEffect(() => {
+    if (isSubmittedSuccessfully) return;
+    const currentUserId = loginUser ? loginUser.id : null;
     //  이메일 도메인 부분 결정
     let domainPart = '';
     if (isDirectInput) {
@@ -95,7 +101,17 @@ const Signup = () => {
       // 도메인이 입력되었더라도 'test@a'처럼 유효하지 않은 경우 이 에러가 표시됩니다.
       setEmailError('올바른 이메일 형식을 입력해주세요');
     } else {
-      setEmailError('');
+      const isEmailDuplicate = allUsers.some(
+        (user) => user.email === fullEmail && user.id !== currentUserId
+      );
+
+      if (isEmailDuplicate) {
+        setEmailError(
+          "이미 이미 가입한 이메일입니다. '이메일 로그인'으로 로그인해주세요."
+        );
+      } else {
+        setEmailError('');
+      }
     }
   }, [
     emailLocalPart,
@@ -104,20 +120,19 @@ const Signup = () => {
     isDirectInput,
     emailTouched,
     domainTouched,
+    allUsers,
+    loginUser,
+    isSubmittedSuccessfully,
   ]);
 
   /* 비밀번호 유효성 검사 */
   useEffect(() => {
-    // 비밀번호 필드 유효성 검사
+    if (isSubmittedSuccessfully) return;
     const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$/;
-
-    // 비밀번호 필드 검사
     if (passwordTouched) {
       if (!password) {
-        // 건드렸는데 비어있는 경우
         setPasswordError('비밀번호를 필수 입력 항목입니다.');
       } else if (!passwordRegex.test(password)) {
-        // 형식 오류
         setPasswordError('영문, 숫자를 포함하여 8자 이상이어야 합니다.');
       } else {
         setPasswordError('');
@@ -125,8 +140,6 @@ const Signup = () => {
     } else {
       setPasswordError('');
     }
-
-    // 비밀번호 확인 필드 검사
     if (confirmPasswordTouched) {
       if (!confirmPassword || password !== confirmPassword) {
         setConfirmPasswordError('비밀번호가 일치하지 않습니다.');
@@ -140,33 +153,38 @@ const Signup = () => {
 
   /* 닉네임 유효성 검사 */
   useEffect(() => {
+    if (isSubmittedSuccessfully) return;
     if (!nicknameTouched) {
       setNicknameError('');
       return;
     }
-
-    // 비어있는지 확인
     if (!nickname.trim()) {
       setNicknameError('필수 입력 항목입니다.');
       return;
     }
-
-    // 길이 확인 (2자)
     if (nickname.trim().length < 2) {
       setNicknameError('2자 이상 입력해주세요.');
       return;
     }
-    // 길이 확인 (20자)
     if (nickname.trim().length > 20) {
       setNicknameError('20자 이하로 입력해주세요.');
       return;
     }
-
-    setNicknameError('');
-  }, [nickname, nicknameTouched]);
+    const currentUserId = loginUser ? loginUser.id : null;
+    if (
+      allUsers.some(
+        (user) => user.nickname === nickname.trim() && user.id !== currentUserId
+      )
+    ) {
+      setNicknameError('사용 중인 별명입니다.');
+    } else {
+      setNicknameError('');
+    }
+  }, [nickname, nicknameTouched, allUsers, loginUser, isSubmittedSuccessfully]);
 
   /* 필수사항 체크 유효성 검사 */
   useEffect(() => {
+    if (isSubmittedSuccessfully) return;
     if (termsTouched) {
       if (!ageTerm || !termsOfUse) {
         setTermsError('필수 항목에 동의해주세요.');
@@ -174,17 +192,17 @@ const Signup = () => {
         setTermsError('');
       }
     }
-  }, [ageTerm, termsOfUse, termsTouched]);
+  }, [ageTerm, termsOfUse, termsTouched, isSubmittedSuccessfully]);
 
   /* 전체 유효성 검사 및 제출 핸들러 */
   const handleSubmit = (e) => {
-    e.preventDefault(); // 모든 필드를 '건드림' 상태로 설정하여 useEffect를 통해 에러 메시지 표시를 강제
+    e.preventDefault();
     setEmailTouched(true);
     setDomainTouched(true);
     setPasswordTouched(true);
     setConfirmPasswordTouched(true);
     setNicknameTouched(true);
-    setTermsTouched(true); // 1. 유효성 검사에 필요한 값들을 먼저 계산하고 변수에 저장합니다.
+    setTermsTouched(true);
 
     let domainPart = '';
     if (isDirectInput) {
@@ -194,19 +212,20 @@ const Signup = () => {
     }
     const fullEmail = `${emailLocalPart}@${domainPart}`;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$/; // areTermsValid를 여기서 먼저 선언하고 초기화합니다.
+    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$/;
     const areTermsValid = ageTerm && termsOfUse;
 
     const isEmailValid =
       emailLocalPart && domainPart && emailRegex.test(fullEmail);
     const isNicknameValid =
-      nickname.trim().length >= 2 && nickname.trim().length <= 20; // 2. 유효성 검사를 순서대로 진행하며 에러 발생 시 해당 필드로 포커스 이동
+      nickname.trim().length >= 2 && nickname.trim().length <= 20;
 
-    if (!isEmailValid) {
+    if (!isEmailValid || emailError) {
       emailRef.current?.focus();
       emailRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
     }
+
     if (!passwordRegex.test(password)) {
       passwordRef.current?.focus();
       passwordRef.current?.scrollIntoView({
@@ -223,18 +242,21 @@ const Signup = () => {
       });
       return;
     }
-    if (!isNicknameValid) {
+
+    if (!isNicknameValid || nicknameError) {
       nicknameRef.current?.focus();
       nicknameRef.current?.scrollIntoView({
         behavior: 'smooth',
         block: 'center',
       });
       return;
-    } // areTermsValid는 이제 정의되었으므로 문제 없이 사용 가능
+    }
     if (!areTermsValid) {
       termsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
-    } // 3. 모든 유효성 검사 통과 후 데이터 제출 처리
+    }
+
+    setIsSubmittedSuccessfully(true);
 
     const userData = {
       email: fullEmail,
@@ -246,7 +268,9 @@ const Signup = () => {
         eventSms,
       },
       id: Date.now().toString(),
+      password: password,
     };
+    dispatch(registerUser(userData));
     dispatch(login(userData));
     console.log('✅ 회원가입 성공! :', userData);
     navigate('/');
@@ -269,7 +293,9 @@ const Signup = () => {
           <div className="mb-6">
             <label
               className={`block text-m font-semibold mb-2 ${
-                emailError ? 'text-red-500' : 'text-gray-700'
+                emailError && !isSubmittedSuccessfully
+                  ? 'text-red-500'
+                  : 'text-gray-700'
               }`}
             >
               이메일
@@ -347,7 +373,7 @@ const Signup = () => {
                 )}
               </div>
             </div>
-            {emailError && (
+            {emailError && !isSubmittedSuccessfully && (
               <p className="text-red-500 text-xs mt-2">{emailError}</p>
             )}
           </div>
@@ -356,7 +382,11 @@ const Signup = () => {
           <div className="mb-6">
             <label
               className={`block font-semibold mb-2 
-          ${passwordError ? 'text-red-500' : 'text-gray-700'}`}
+          ${
+            passwordError && !isSubmittedSuccessfully
+              ? 'text-red-500'
+              : 'text-gray-700'
+          }`}
             >
               비밀번호
             </label>
@@ -372,12 +402,12 @@ const Signup = () => {
               onBlur={() => setPasswordTouched(true)}
               className={`text-sm h-10 w-full p-3 border rounded-md focus:outline-none focus:ring-1 placeholder-gray-400
           ${
-            passwordError
+            passwordError && !isSubmittedSuccessfully
               ? 'border-red-500 focus:ring-red-500'
               : 'border-gray-300 focus:ring-blue-500'
           }`}
             />
-            {passwordError && (
+            {passwordError && !isSubmittedSuccessfully && (
               <p className="text-red-500 text-xs mt-2">{passwordError}</p>
             )}
           </div>
@@ -386,7 +416,11 @@ const Signup = () => {
           <div className="mb-6">
             <label
               className={`block text-sm font-semibold mb-2 
-          ${confirmPasswordError ? 'text-red-500' : 'text-gray-700'}`}
+          ${
+            confirmPasswordError && !isSubmittedSuccessfully
+              ? 'text-red-500'
+              : 'text-gray-700'
+          }`}
             >
               비밀번호 확인
             </label>
@@ -399,12 +433,12 @@ const Signup = () => {
               onBlur={() => setConfirmPasswordTouched(true)}
               className={`h-10 w-full p-3 border rounded-md focus:outline-none focus:ring-1 text-sm placeholder-gray-400
           ${
-            confirmPasswordError
+            confirmPasswordError && !isSubmittedSuccessfully
               ? 'border-red-500 focus:ring-red-500'
               : 'border-gray-300 focus:ring-blue-500'
           }`}
             />
-            {confirmPasswordError && (
+            {confirmPasswordError && !isSubmittedSuccessfully && (
               <p className="text-red-500 text-xs mt-2">
                 {confirmPasswordError}
               </p>
@@ -432,12 +466,12 @@ const Signup = () => {
               onBlur={() => setNicknameTouched(true)}
               className={`h-10 w-full p-3 border rounded-md focus:outline-none focus:ring-1 text-sm placeholder-gray-400
           ${
-            nicknameError
+            nicknameError && !isSubmittedSuccessfully
               ? 'border-red-500 focus:ring-red-500'
               : 'border-gray-300 focus:ring-blue-500'
           }`}
             />
-            {nicknameError && (
+            {nicknameError && !isSubmittedSuccessfully && (
               <p className="text-red-500 text-xs mt-2">{nicknameError}</p>
             )}
           </div>
@@ -447,7 +481,9 @@ const Signup = () => {
             <div
               ref={termsRef}
               className={`p-4 border rounded-sm space-y-3 ${
-                termsError ? 'border-red-500' : 'border-gray-200'
+                termsError && !isSubmittedSuccessfully
+                  ? 'border-red-500'
+                  : 'border-gray-200'
               }`}
             >
               {/* 전체동의 */}
@@ -545,7 +581,7 @@ const Signup = () => {
                 </div>
               </div>
             </div>
-            {termsError && (
+            {termsError && !isSubmittedSuccessfully && (
               <p className="mt-2 text-red-500 text-xs mb-2">{termsError}</p>
             )}
           </div>
