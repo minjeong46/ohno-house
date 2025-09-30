@@ -1,5 +1,6 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import userReducer from './userSlice';
+import usersReducer from './usersSlice';
 import {
   persistStore,
   persistReducer,
@@ -15,19 +16,22 @@ import storage from 'redux-persist/lib/storage';
 
 //Persist 설정 정의 - user slice만 저장하도록 설정
 const persistConfig = {
-  key: 'root', 
+  key: 'root',
   storage,
-  whitelist: ['user'],
+  whitelist: ['user', 'users'],
 };
 
+const rootReducer = combineReducers({
+  user: userReducer,
+  users: usersReducer,
+});
+
 //userReducer를 persistConfig로 래핑
-const persistedUserReducer = persistReducer(persistConfig, userReducer);
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
   // 래핑된 리듀서 사용
-  reducer: {
-    user: persistedUserReducer,
-  },
+  reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
