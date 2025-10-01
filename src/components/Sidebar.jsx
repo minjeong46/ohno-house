@@ -1,26 +1,13 @@
-import { createPortal } from "react-dom";
+import { ChevronUpIcon } from "@heroicons/react/24/outline";
 
 const Sidebar = ({ setIsSidebar }) => {
-    return createPortal(
-        <div className="p-2 fixed top-16 right-[355px] w-[268px] bg-white border rounded-md shadow-sm z-[1000]">
+    return (
+        <div className="fixed top-16 right-[19%] w-[268px] bg-white border rounded-md shadow-sm p-2 z-[9999]">
             <div className="pt-5">
                 <div className="flex justify-between mx-4 mb-2 text-lg">
                     <span className="font-bold">인기 검색어</span>
                     <button onClick={() => setIsSidebar(false)}>
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke-width="1.5"
-                            stroke="currentColor"
-                            className="w-5 h-5"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                d="m4.5 15.75 7.5-7.5 7.5 7.5"
-                            />
-                        </svg>
+                        <ChevronUpIcon className="h-5 w-5" />
                     </button>
                 </div>
                 <ul>
@@ -41,8 +28,7 @@ const Sidebar = ({ setIsSidebar }) => {
                     </li>
                 </ul>
             </div>
-        </div>,
-        document.body
+        </div>
     );
 };
 

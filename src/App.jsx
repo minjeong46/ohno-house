@@ -1,30 +1,41 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Layout from "./components/Layout";
-import Home from "./pages/community/Home";
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Layout from './components/Layout';
+import Home from './pages/community/Home';
+import Sign from './pages/signup/Signup';
+import Login from './pages/login/Login';
+import PasswordReset from './pages/login/ResetLayout';
 
 const router = createBrowserRouter([
-    {
-        path: "/",
-        element: <Layout />,
-        children: [
-            {
-                index: true, // 기본페이지
-                element: <Home />,
-            },
-            {
-                path: "shop",
-                // 여기에 element
-            },
-            {
-                path: "login",
-                // 여기에 element
-            },
-        ],
-    },
+  {
+    path: '/',
+    element: <Layout />,
+    children: [
+      {
+        index: true, // 기본페이지
+        element: <Home />,
+      },
+      {
+        path: 'shop',
+        // 여기에 element
+      },
+    ],
+  },
+  {
+    path: '/sign',
+    element: <Sign />,
+  },
+  {
+    path: '/login',
+    element: <Login />,
+  },
+  {
+    path: '/password-reset',
+    element: <PasswordReset/>,
+  },
 ]);
 
 function App() {
-    return <RouterProvider router={router} />;
+  return <RouterProvider router={router} />;
 }
 
 export default App;
