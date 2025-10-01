@@ -1,6 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { login } from '../../store/userSlice';
+import { registerUser } from '../../store/usersSlice';
+import Logo from '../../assets/ohno_logo.svg';
 
 const Signup = () => {
+  const allUsers = useSelector((state) => state.users.allUsers) || [];
+  const loginUser = useSelector((state) => state.userAuth?.loginUser);
   const [isDirectInput, setIsDirectInput] = useState(false);
   const [directInputValue, setDirectInputValue] = useState('');
   const [selectedValue, setSelectedValue] = useState('선택해주세요');
@@ -23,6 +30,7 @@ const Signup = () => {
   const [eventSms, setEventSms] = useState(false);
   const [termsError, setTermsError] = useState('');
   const [termsTouched, setTermsTouched] = useState(false);
+  const [isSubmittedSuccessfully, setIsSubmittedSuccessfully] = useState(false);
 
   // Ref 생성: 각 입력 필드를 참조하기 위함
   const emailRef = useRef(null);
@@ -30,6 +38,8 @@ const Signup = () => {
   const confirmPasswordRef = useRef(null);
   const nicknameRef = useRef(null);
   const termsRef = useRef(null);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   /* 이메일란 직접입력 확인 */
   const handleClearInput = () => {
@@ -56,6 +66,8 @@ const Signup = () => {
 
   /* 이메일 유효성 검사 */
   useEffect(() => {
+    if (isSubmittedSuccessfully) return;
+    const currentUserId = loginUser ? loginUser.id : null;
     //  이메일 도메인 부분 결정
     let domainPart = '';
     if (isDirectInput) {
@@ -89,7 +101,17 @@ const Signup = () => {
       // 도메인이 입력되었더라도 'test@a'처럼 유효하지 않은 경우 이 에러가 표시됩니다.
       setEmailError('올바른 이메일 형식을 입력해주세요');
     } else {
-      setEmailError('');
+      const isEmailDuplicate = allUsers.some(
+        (user) => user.email === fullEmail && user.id !== currentUserId
+      );
+
+      if (isEmailDuplicate) {
+        setEmailError(
+          "이미 이미 가입한 이메일입니다. '이메일 로그인'으로 로그인해주세요."
+        );
+      } else {
+        setEmailError('');
+      }
     }
   }, [
     emailLocalPart,
@@ -98,20 +120,19 @@ const Signup = () => {
     isDirectInput,
     emailTouched,
     domainTouched,
+    allUsers,
+    loginUser,
+    isSubmittedSuccessfully,
   ]);
 
   /* 비밀번호 유효성 검사 */
   useEffect(() => {
-    // 비밀번호 필드 유효성 검사
+    if (isSubmittedSuccessfully) return;
     const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$/;
-
-    // 비밀번호 필드 검사
     if (passwordTouched) {
       if (!password) {
-        // 건드렸는데 비어있는 경우
         setPasswordError('비밀번호를 필수 입력 항목입니다.');
       } else if (!passwordRegex.test(password)) {
-        // 형식 오류
         setPasswordError('영문, 숫자를 포함하여 8자 이상이어야 합니다.');
       } else {
         setPasswordError('');
@@ -119,8 +140,6 @@ const Signup = () => {
     } else {
       setPasswordError('');
     }
-
-    // 비밀번호 확인 필드 검사
     if (confirmPasswordTouched) {
       if (!confirmPassword || password !== confirmPassword) {
         setConfirmPasswordError('비밀번호가 일치하지 않습니다.');
@@ -134,33 +153,38 @@ const Signup = () => {
 
   /* 닉네임 유효성 검사 */
   useEffect(() => {
+    if (isSubmittedSuccessfully) return;
     if (!nicknameTouched) {
       setNicknameError('');
       return;
     }
-
-    // 비어있는지 확인
     if (!nickname.trim()) {
       setNicknameError('필수 입력 항목입니다.');
       return;
     }
-
-    // 길이 확인 (2자)
     if (nickname.trim().length < 2) {
       setNicknameError('2자 이상 입력해주세요.');
       return;
     }
-    // 길이 확인 (20자)
     if (nickname.trim().length > 20) {
       setNicknameError('20자 이하로 입력해주세요.');
       return;
     }
-
-    setNicknameError('');
-  }, [nickname, nicknameTouched]);
+    const currentUserId = loginUser ? loginUser.id : null;
+    if (
+      allUsers.some(
+        (user) => user.nickname === nickname.trim() && user.id !== currentUserId
+      )
+    ) {
+      setNicknameError('사용 중인 별명입니다.');
+    } else {
+      setNicknameError('');
+    }
+  }, [nickname, nicknameTouched, allUsers, loginUser, isSubmittedSuccessfully]);
 
   /* 필수사항 체크 유효성 검사 */
   useEffect(() => {
+    if (isSubmittedSuccessfully) return;
     if (termsTouched) {
       if (!ageTerm || !termsOfUse) {
         setTermsError('필수 항목에 동의해주세요.');
@@ -168,26 +192,18 @@ const Signup = () => {
         setTermsError('');
       }
     }
-  }, [ageTerm, termsOfUse, termsTouched]);
+  }, [ageTerm, termsOfUse, termsTouched, isSubmittedSuccessfully]);
 
   /* 전체 유효성 검사 및 제출 핸들러 */
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // 1. 모든 필드를 'touched' 상태로 강제 설정하여 최신 에러 메시지를 표시합니다.
     setEmailTouched(true);
-    setDomainTouched(true); // 이메일 도메인 필드도 확인
+    setDomainTouched(true);
     setPasswordTouched(true);
     setConfirmPasswordTouched(true);
     setNicknameTouched(true);
     setTermsTouched(true);
 
-    // useEffect가 한 번 더 실행되어 최신 에러 상태를 업데이트할 시간을 줍니다.
-    // 하지만, 제출 로직은 동기적으로 실행되어야 하므로,
-    // 현재의 에러 상태를 기반으로 유효성 검사를 수동으로 다시 확인합니다.
-
-    // 2. 최종 에러 상태 확인 및 스크롤 위치 결정
-    // 이메일 도메인 부분 결정 로직을 다시 실행
     let domainPart = '';
     if (isDirectInput) {
       domainPart = directInputValue;
@@ -197,25 +213,19 @@ const Signup = () => {
     const fullEmail = `${emailLocalPart}@${domainPart}`;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$/;
-
-    // A. 이메일 검사
-    const isEmailValid =
-      emailLocalPart && domainPart && emailRegex.test(fullEmail);
-    // B. 비밀번호 검사 (변수 선언 삭제)
-    // const isPasswordValid = passwordRegex.test(password) && password === confirmPassword;
-    // 변수 없이 바로 다음의 개별 if 문으로 유효성 검사를 진행합니다.
-    // C. 닉네임 검사
-    const isNicknameValid =
-      nickname.trim().length >= 2 && nickname.trim().length <= 20;
-    // D. 약관 검사 (필수 항목만)
     const areTermsValid = ageTerm && termsOfUse;
 
-    // 3. 유효성 검사에 실패한 경우, 해당 섹션으로 스크롤 이동
-    if (!isEmailValid) {
-      emailRef.current?.focus(); // 포커스가 가능한 필드에 포커스
+    const isEmailValid =
+      emailLocalPart && domainPart && emailRegex.test(fullEmail);
+    const isNicknameValid =
+      nickname.trim().length >= 2 && nickname.trim().length <= 20;
+
+    if (!isEmailValid || emailError) {
+      emailRef.current?.focus();
       emailRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
     }
+
     if (!passwordRegex.test(password)) {
       passwordRef.current?.focus();
       passwordRef.current?.scrollIntoView({
@@ -232,7 +242,8 @@ const Signup = () => {
       });
       return;
     }
-    if (!isNicknameValid) {
+
+    if (!isNicknameValid || nicknameError) {
       nicknameRef.current?.focus();
       nicknameRef.current?.scrollIntoView({
         behavior: 'smooth',
@@ -245,7 +256,8 @@ const Signup = () => {
       return;
     }
 
-    // 4. 모든 유효성 검사를 통과한 경우 (서버 저장 로직 대신 임시 저장 및 이동)
+    setIsSubmittedSuccessfully(true);
+
     const userData = {
       email: fullEmail,
       nickname: nickname,
@@ -255,23 +267,23 @@ const Signup = () => {
         marketingInfo,
         eventSms,
       },
+      id: Date.now().toString(),
+      password: password,
     };
-
-    console.log('✅ 회원가입 성공! (임시 데이터 저장):', userData);
-
-    // 5. 루트 페이지로 이동 (실제 환경에서는 react-router-dom의 useNavigate를 사용)
-    window.location.href = '/';
+    dispatch(registerUser(userData));
+    dispatch(login(userData));
+    console.log('✅ 회원가입 성공! :', userData);
+    navigate('/');
   };
 
   return (
     <>
-      <header className="w-[90px] h-50 flex justify-first m-4 mt-[40px]">
+      <header className="w-[80px] h-50 m-4 mt-[40px]">
         <a href="/">
-          <img src="../../public/icon+logo.svg" alt="로고" />
+          <img src={Logo} alt="로고" />
         </a>
       </header>
       <div className="w-full flex items-center justify-center mt-[60px] mb-[60px]">
-        {/* ⭐️ form 태그 사용 및 onSubmit 핸들러 연결 */}
         <form className="max-w-md w-[360px] bg-white" onSubmit={handleSubmit}>
           <h2 className="text-xl font-bold mb-6 text-gray-700">회원가입</h2>
 
@@ -281,7 +293,9 @@ const Signup = () => {
           <div className="mb-6">
             <label
               className={`block text-m font-semibold mb-2 ${
-                emailError ? 'text-red-500' : 'text-gray-700'
+                emailError && !isSubmittedSuccessfully
+                  ? 'text-red-500'
+                  : 'text-gray-700'
               }`}
             >
               이메일
@@ -315,7 +329,7 @@ const Signup = () => {
                       }`}
                     />
                     <button
-                      type="button" // ⭐️ 버튼이 폼 제출을 막도록 type="button" 추가
+                      type="button"
                       onClick={handleClearInput}
                       className="lowercase absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
                     >
@@ -324,7 +338,6 @@ const Signup = () => {
                   </div>
                 ) : (
                   <select
-                    // ref는 select에는 연결하지 않고, 대표 요소인 이메일 input에만 연결하여 스크롤 위치를 잡음
                     className={`w-[170px] h-10 text-sm pl-3 p-1 border rounded-md focus:outline-none focus:ring-1
                       ${
                         selectedValue === '선택해주세요'
@@ -338,12 +351,12 @@ const Signup = () => {
                       }`}
                     onChange={(e) => {
                       setSelectedValue(e.target.value);
-                      setDomainTouched(true); // ⭐️ select 변경 시 domainTouched 설정
+                      setDomainTouched(true);
                       if (e.target.value === '직접입력') {
                         setIsDirectInput(true);
                       } else {
                         setIsDirectInput(false);
-                        setDirectInputValue(''); // 도메인 선택 시 직접 입력 값 초기화
+                        setDirectInputValue('');
                       }
                     }}
                   >
@@ -360,7 +373,7 @@ const Signup = () => {
                 )}
               </div>
             </div>
-            {emailError && (
+            {emailError && !isSubmittedSuccessfully && (
               <p className="text-red-500 text-xs mt-2">{emailError}</p>
             )}
           </div>
@@ -369,7 +382,11 @@ const Signup = () => {
           <div className="mb-6">
             <label
               className={`block font-semibold mb-2 
-          ${passwordError ? 'text-red-500' : 'text-gray-700'}`}
+          ${
+            passwordError && !isSubmittedSuccessfully
+              ? 'text-red-500'
+              : 'text-gray-700'
+          }`}
             >
               비밀번호
             </label>
@@ -385,12 +402,12 @@ const Signup = () => {
               onBlur={() => setPasswordTouched(true)}
               className={`text-sm h-10 w-full p-3 border rounded-md focus:outline-none focus:ring-1 placeholder-gray-400
           ${
-            passwordError
+            passwordError && !isSubmittedSuccessfully
               ? 'border-red-500 focus:ring-red-500'
               : 'border-gray-300 focus:ring-blue-500'
           }`}
             />
-            {passwordError && (
+            {passwordError && !isSubmittedSuccessfully && (
               <p className="text-red-500 text-xs mt-2">{passwordError}</p>
             )}
           </div>
@@ -399,7 +416,11 @@ const Signup = () => {
           <div className="mb-6">
             <label
               className={`block text-sm font-semibold mb-2 
-          ${confirmPasswordError ? 'text-red-500' : 'text-gray-700'}`}
+          ${
+            confirmPasswordError && !isSubmittedSuccessfully
+              ? 'text-red-500'
+              : 'text-gray-700'
+          }`}
             >
               비밀번호 확인
             </label>
@@ -412,12 +433,12 @@ const Signup = () => {
               onBlur={() => setConfirmPasswordTouched(true)}
               className={`h-10 w-full p-3 border rounded-md focus:outline-none focus:ring-1 text-sm placeholder-gray-400
           ${
-            confirmPasswordError
+            confirmPasswordError && !isSubmittedSuccessfully
               ? 'border-red-500 focus:ring-red-500'
               : 'border-gray-300 focus:ring-blue-500'
           }`}
             />
-            {confirmPasswordError && (
+            {confirmPasswordError && !isSubmittedSuccessfully && (
               <p className="text-red-500 text-xs mt-2">
                 {confirmPasswordError}
               </p>
@@ -445,12 +466,12 @@ const Signup = () => {
               onBlur={() => setNicknameTouched(true)}
               className={`h-10 w-full p-3 border rounded-md focus:outline-none focus:ring-1 text-sm placeholder-gray-400
           ${
-            nicknameError
+            nicknameError && !isSubmittedSuccessfully
               ? 'border-red-500 focus:ring-red-500'
               : 'border-gray-300 focus:ring-blue-500'
           }`}
             />
-            {nicknameError && (
+            {nicknameError && !isSubmittedSuccessfully && (
               <p className="text-red-500 text-xs mt-2">{nicknameError}</p>
             )}
           </div>
@@ -460,7 +481,9 @@ const Signup = () => {
             <div
               ref={termsRef}
               className={`p-4 border rounded-sm space-y-3 ${
-                termsError ? 'border-red-500' : 'border-gray-200'
+                termsError && !isSubmittedSuccessfully
+                  ? 'border-red-500'
+                  : 'border-gray-200'
               }`}
             >
               {/* 전체동의 */}
@@ -543,7 +566,6 @@ const Signup = () => {
                   </div>
                 </div>
 
-                {/* 이벤트, 쿠폰, 특가 알림 (선택) */}
                 <div className="flex items-center space-x-2">
                   <input
                     type="checkbox"
@@ -559,12 +581,11 @@ const Signup = () => {
                 </div>
               </div>
             </div>
-            {termsError && (
+            {termsError && !isSubmittedSuccessfully && (
               <p className="mt-2 text-red-500 text-xs mb-2">{termsError}</p>
             )}
           </div>
 
-          {/* 회원가입하기 버튼 */}
           <button
             type="submit"
             className="text-m w-full h-12 p-2 text-white text-lg font-bold bg-[#35C5F0] rounded-md hover:bg-[#11A5FD] transition-colors"
@@ -572,11 +593,10 @@ const Signup = () => {
             회원가입하기
           </button>
 
-          {/* 로그인 링크 */}
           <div className="text-center mt-4">
             <p className="text-sm text-black">
               이미 아이디가 있으신가요?
-              <a href="/" className="font-bold underline pl-2">
+              <a href="/login" className="font-bold underline pl-2">
                 로그인
               </a>
             </p>
