@@ -1,21 +1,11 @@
 import React from "react";
-import { interiorReview } from "./images";
+import { interiorReview } from "../../data/community/HomeSec6Data.js";
+import SectionHeader from "../../components/community/SectionHeader.jsx";
 
 const HomeSec6 = () => {
     return (
         <section className="w-full px-[60px] mb-[40px]">
-            <div className="flex justify-between items-center py-5">
-                <div>
-                    <strong className="text-xl hover:text-[#aaa]">
-                        유저들의 인테리어 시공 리뷰
-                    </strong>
-                </div>
-                <div>
-                    <span className="font-bold text-[#11A5FD]">
-                        <a href="/">더보기</a>
-                    </span>
-                </div>
-            </div>
+            <SectionHeader title={"유저들의 인테리어 시공 리뷰"} />
             <div className="grid grid-cols-3 gap-5">
                 {interiorReview.map((item, index) => {
                     return (
@@ -23,7 +13,7 @@ const HomeSec6 = () => {
                             <div className="overflow-hidden rounded-md">
                                 <img
                                     src={item.img}
-                                    alt=""
+                                    alt={item.label}
                                     className="w-full h-[224px] object-cover hover:scale-105 transition-transform duration-300"
                                 />
                             </div>

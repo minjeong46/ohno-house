@@ -1,9 +1,6 @@
-import React from "react";
-import { categoryIcon } from "./images.js";
+import { categoryIcon } from "../../data/community/HomeSec2Data.js";
 
 const HomeSec2 = () => {
-
-
 
     return (
         <section className="w-full px-[60px] mb-[40px]">
@@ -12,7 +9,7 @@ const HomeSec2 = () => {
                     return (
                         <li key={`${index}-${item}`}>
                             <a href="/" className="flex flex-col">
-                                <img src={item.img} alt="" className="max-w-[88px] mb-3" />
+                                <img src={item.img} alt={item.label} className="max-w-[88px] mb-3" />
                                 <span className="text-center font-light">{item.label}</span>
                             </a>
                         </li>
