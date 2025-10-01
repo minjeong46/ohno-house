@@ -85,7 +85,7 @@ const Footer = () => {
           </div>
           {/* 3. 회사 상세 정보 및 인증 마크 (Company Details & Certifications) */}
           <div className="md:col-span-3 lg:col-span-2 space-y-4 text-[11px] border-l border-[#EAEDEF] pl-8">
-            <p className="text-[#828C94] leading-relaxed">
+            <div className="text-[#828C94] leading-relaxed">
               (주)버킷리스트 | 대표이사 이상민 | 서울 서초구 서초대로 어딘가에
               삼성생명서초타워 였으면 좋겠다{' '}
               <p>
@@ -95,7 +95,7 @@ const Footer = () => {
                 </a>
               </p>
               <p>통신판매업신고번호 제2025-서울서초-0926호</p>
-            </p>
+            </div>
 
             {/* 안전 거래 문구 */}
             <p className="text-[#828C94] text-[9px] leading-relaxed">

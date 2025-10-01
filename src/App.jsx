@@ -1,7 +1,10 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "./components/Layout";
 import Home from "./pages/community/Home";
-import Cart from "./pages/shoppingCart/Cart";
+import Sign from "./pages/signup/Signup";
+import Login from "./pages/login/Login";
+import PasswordReset from "./pages/login/ResetLayout";
+import Cart from "./pages/shoppingCart/cart";
 
 const router = createBrowserRouter([
     {
@@ -17,14 +20,22 @@ const router = createBrowserRouter([
                 // 여기에 element
             },
             {
-                path: "login",
-                // 여기에 element
-            },
-            {
                 path: "cart",
-                element: <Cart />,
-            },
+                element: <Cart />
+            }
         ],
+    },
+    {
+        path: "/sign",
+        element: <Sign />,
+    },
+    {
+        path: "/login",
+        element: <Login />,
+    },
+    {
+        path: "/password-reset",
+        element: <PasswordReset />,
     },
 ]);
 
