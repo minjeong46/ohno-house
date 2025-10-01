@@ -1,6 +1,11 @@
+import { useDispatch } from "react-redux";
+import { closeModal } from "../../store/modalSlice";
 import Modal from "./Modal";
 
 const CartAmountModal = () => {
+
+    const dispatch = useDispatch();
+
     return (
         <Modal width={"max-w-[300px] w-full"} height={"h-fit"}>
             <div className="w-full p-4 flex justify-center">
@@ -17,7 +22,9 @@ const CartAmountModal = () => {
                 ></input>
             </div>
             <div className="py-4 px-4 flex">
-                <button className="h-[50px] border-md w-[calc(50%-5px)] mr-[5px] rounded-md border">
+                <button
+                    className="h-[50px] border-md w-[calc(50%-5px)] mr-[5px] rounded-md border" onClick={()=> dispatch(closeModal())}
+                >
                     취소
                 </button>
                 <button className="h-[50px] border-md w-[50%] bg-[#11A5FD] rounded-md text-white hover:bg-[#0198ED]">
