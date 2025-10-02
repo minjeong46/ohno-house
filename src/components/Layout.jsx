@@ -3,9 +3,12 @@ import Footer from "./Footer";
 import { Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import { useState } from "react";
+import CartAmountModal from "./Modal/CartAmountModal";
+import { useSelector } from "react-redux";
 
 const Layout = () => {
     const [isSidebar, setIsSidebar] = useState(false);
+    const { isOpen, modalType } = useSelector((state) => state.modal);
 
     return (
         <div className="w-screen h-screen relative">
@@ -15,6 +18,7 @@ const Layout = () => {
             </main>
             <Footer />
             {isSidebar && <Sidebar setIsSidebar={setIsSidebar} />}
+            {isOpen && modalType === "cartAmount" && <CartAmountModal />}
         </div>
     );
 };

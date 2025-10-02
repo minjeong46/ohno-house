@@ -1,6 +1,7 @@
 import { XMarkIcon } from "@heroicons/react/24/outline";
 
 const CartPayList = () => {
+
     return (
         <div className="ml-10 md:min-w-[280px]">
             <div className="flex flex-col gap-2">

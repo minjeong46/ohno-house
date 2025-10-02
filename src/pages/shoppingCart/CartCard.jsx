@@ -3,8 +3,34 @@ import { CheckIcon } from "@heroicons/react/24/outline";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { MinusIcon } from "@heroicons/react/24/outline";
 import { PlusIcon } from "@heroicons/react/24/outline";
+import { useRef } from "react";
+import { useDispatch } from "react-redux";
+import { openModal } from "../../store/modalSlice.js";
 
 const CartCard = () => {
+    const amountRef = useRef(1);
+    const dispatch = useDispatch();
+
+    const minusQuantityHandler = () => {
+        if (Number(amountRef.current.value) !== 1) {
+            amountRef.current.value--;
+            console.log(amountRef.current.value);
+        }
+    };
+
+    const plusQuantityHandler = () => {
+        amountRef.current.value++;
+        console.log(amountRef.current.value);
+    };
+
+    const quantityOnChangeHandler = (e) => {
+        amountRef.current.value = e.target.value;
+    };
+
+    const quantityOnClickHandler = () => {
+        dispatch(openModal({ type: "cartAmount" }));
+    };
+
     return (
         <ul className="border mt-3">
             <li>
@@ -59,13 +85,23 @@ const CartCard = () => {
                         <div className="w-full flex justify-between">
                             <div className="h-8 py-1 px-2 flex gap-1 border rounded-md bg-white">
                                 <button>
-                                    <MinusIcon className="h-5 w-5 text-gray-700" />
+                                    <MinusIcon
+                                        className="h-5 w-5 text-gray-700"
+                                        onClick={minusQuantityHandler}
+                                    />
                                 </button>
-                                <button className="inline-flex justify-center items-center min-w-[28px] py-1 rounded-md text-sm hover:bg-gray-300">
-                                    1
-                                </button>
+                                <input
+                                    ref={amountRef}
+                                    defaultValue={1}
+                                    className="text-center max-w-[28px] py-1 rounded-md text-sm hover:bg-gray-300"
+                                    onChange={(e) => quantityOnChangeHandler(e)}
+                                    onClick={quantityOnClickHandler}
+                                />
                                 <button>
-                                    <PlusIcon className="h-5 w-5 text-gray-700" />
+                                    <PlusIcon
+                                        className="h-5 w-5 text-gray-700"
+                                        onClick={plusQuantityHandler}
+                                    />
                                 </button>
                             </div>
                             <span className="font-bold text-lg">30,000원</span>
