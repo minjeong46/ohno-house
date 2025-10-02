@@ -80,9 +80,10 @@ const HeaderTop = ({
                 <a className="p-2 block lg:hidden">
                   <MagnifyingGlassIcon className="w-6 h-6 text-gray-700 hover:text-[#11A5FD] cursor-pointer" />
                 </a>
-                <a className="p-2">
+                <NavLink to={"/cart"} className="p-2 relative">
                   <ShoppingCartIcon className="w-6 h-6 text-gray-700 hover:text-[#11A5FD] cursor-pointer" />
-                </a>
+                  <i className="absolute block w-4 h-4 rounded-lg bg-[#D48A84] top-1 right-1 before:content-['1'] before:absolute before:top-0 before:left-[5px] before:flex before:items-center before:justify-center before:text-white before:text-[10px]"></i>
+                </NavLink>
               </div>
               {!isLoggedIn ? (
                 <div className="text-gray-600 text-sm flex items-center whitespace-nowrap cursor-pointer">
