@@ -13,8 +13,8 @@ const ProductSection = () => {
 
   const repeatedProducts = Array.from({ length: itemsToShow }, (_, index) => {
     const productIndex = index % PRODUCT_COUNT;
-      const originalProduct = products[productIndex];
-      
+    const originalProduct = products[productIndex];
+
     return {
       ...originalProduct,
       id: `${originalProduct.id}_${Math.floor(index / PRODUCT_COUNT)}`,
@@ -25,18 +25,18 @@ const ProductSection = () => {
     const scrollHeight = window.innerHeight + window.scrollY;
     const documentHeight = document.documentElement.scrollHeight;
 
-    if (scrollHeight >= documentHeight - 100) {
+    if (scrollHeight >= documentHeight - 500) {
       setItemsToShow((prev) => prev + ITEMS_PER_LOAD);
     }
   }, []);
-    
+
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [handleScroll]); 
+  }, [handleScroll]);
   const renderTabButton = (tabName) => {
     const isActive = activeTab === tabName;
     const baseClasses =
