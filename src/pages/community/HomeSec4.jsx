@@ -1,7 +1,7 @@
 import React from "react";
 import { todayHouse } from "../../data/community/HomeSec4Data.js";
 import scrap from "../../assets/community/scrap.svg";
-import SectionHeader from "../../components/community/SectionHeader.jsx";
+import SectionHeader from "../../pages/community/SectionHeader.jsx";
 
 const HomeSec4 = () => {
     return (

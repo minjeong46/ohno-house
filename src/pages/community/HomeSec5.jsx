@@ -1,6 +1,6 @@
 import React from "react";
 import { categoryProduct } from "../../data/community/HomeSec5Data.js";
-import SectionHeader from "../../components/community/SectionHeader.jsx";
+import SectionHeader from "../../pages/community/SectionHeader.jsx";
 import CustomSwiper from "../../components/customSwiper/CustomSwiper.jsx";
 
 const HomeSec5 = () => {

@@ -1,7 +1,7 @@
 import { interiorSlide } from "../../data/community/HomeSec3Data.js";
 import scrap from "../../assets/community/scrap.svg";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
-import SectionHeader from "../../components/community/SectionHeader.jsx";
+import SectionHeader from "../../pages/community/SectionHeader.jsx";
 import CustomSwiper from "../../components/customSwiper/CustomSwiper.jsx";
 
 const HomeSec3 = () => {

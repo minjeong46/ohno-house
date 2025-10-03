@@ -5,11 +5,12 @@ import { ChevronDownIcon } from "@heroicons/react/24/outline";
 const HeaderBottom = ({ pathShop, setIsSidebar, scroll }) => {
     return (
         <div
-            className={`fixed top-header-top left-0 w-full z-30 bg-white border-b transition-transform duration-300 ${scroll
-                             ? "-translate-y-full group-hover:translate-y-0"
-                             : "translate-y-0"
-                     }
-                `}
+            className={`fixed top-header-top left-0 w-full z-30 bg-white border-b transition-transform duration-300 ${
+                scroll
+                    ? "-translate-y-full group-hover:translate-y-0"
+                    : "translate-y-0"
+            }
+                    `}
         >
             <div className="max-w-[1256px] mx-auto px-10 lg:px-14 flex items-center justify-between sticky">
                 <nav className="flex flex-grow flex-shrink-0">
