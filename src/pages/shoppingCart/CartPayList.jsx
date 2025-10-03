@@ -1,10 +1,25 @@
 import { XMarkIcon } from "@heroicons/react/24/outline";
+import { useEffect, useState } from "react";
 
 const CartPayList = () => {
+    const [scroll, setScroll] = useState(false);
+
+    useEffect(() => {
+        const on = () => {
+            setScroll(window.scrollY >= 28);
+        };
+        console.log(window.screenY)
+        window.addEventListener("scroll", on);
+        return () => window.removeEventListener("scroll", on);
+    }, []);
 
     return (
-        <div className="ml-10 md:min-w-[280px]">
-            <div className="flex flex-col gap-2">
+        <div className="ml-10 md:min-w-[280px] relative">
+            <div
+                className={`flex flex-col gap-2 ${
+                    scroll ? "sticky transition-[top] duration-500 top-[128px] w-[280px]" : ""
+                }`}
+            >
                 <div className="p-4 rounded-md border text-gray-800">
                     <ul className="flex flex-col gap-4">
                         <li className="flex justify-between text-sm">

@@ -1,6 +1,6 @@
 import React from "react";
 import { interiorReview } from "../../data/community/HomeSec6Data.js";
-import SectionHeader from "../../components/community/SectionHeader.jsx";
+import SectionHeader from "../../pages/community/SectionHeader.jsx";
 
 const HomeSec6 = () => {
     return (

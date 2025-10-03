@@ -42,11 +42,21 @@ const Header = ({ setIsSidebar }) => {
     };
 
     useEffect(() => {
-        const on = () => {
-            setScroll(window.scrollY >= 84);
-        };
-        window.addEventListener("scroll", on);
-        return () => window.removeEventListener("scroll", on);
+        if (path.pathname !== "/cart") {
+            const on = () => {
+                setScroll(window.scrollY >= 84);
+            };
+
+            window.addEventListener("scroll", on);
+            return () => window.removeEventListener("scroll", on);
+        } else {
+            const on = () => {
+                setScroll(window.scrollY >= 28);
+            };
+
+            window.addEventListener("scroll", on);
+            return () => window.removeEventListener("scroll", on);
+        }
     }, []);
 
     useEffect(() => {
@@ -57,7 +67,7 @@ const Header = ({ setIsSidebar }) => {
     }, [path]);
 
     return (
-        <header className="w-full h-header-total relative bg-white mx-auto group">
+        <header className="h-header-total w-full relative bg-white group">
             {/* 상단 */}
             <HeaderTop
                 searchInputRef={searchInputRef}
@@ -66,7 +76,11 @@ const Header = ({ setIsSidebar }) => {
                 clearClickHandler={clearClickHandler}
             />
             {/* 하단 */}
-            <HeaderBottom pathShop={pathShop} setIsSidebar={setIsSidebar} scroll={scroll} />
+            <HeaderBottom
+                pathShop={pathShop}
+                setIsSidebar={setIsSidebar}
+                scroll={scroll}
+            />
         </header>
     );
 };
