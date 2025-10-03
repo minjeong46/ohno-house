@@ -11,9 +11,6 @@ function Home() {
       <HomeBanner />
       <main className="max-w-7xl mx-auto px-4">
         <CategoryList />
-
-        {/* TabList와 ProductSection은 연동되어야 함 */}
-        <TabList />
         <ProductSection />
       </main>
     </div>
