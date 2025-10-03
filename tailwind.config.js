@@ -6,6 +6,11 @@ export default {
             fontFamily: {
                 sans: ["Pretendard", "Noto Sans KR", "sans-serif"]
             },
+            spacing: {
+                'header-top' : "84px",
+                'header-bottom' : "50px",
+                'header-total' : "134px"
+            }
         },
     },
     plugins: [],

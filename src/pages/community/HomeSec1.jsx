@@ -1,10 +1,11 @@
-import { communityImages, slide } from "./images.js";
+import { communityImages, slide } from "../../data/community/HomeSec1Data.js";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation, Autoplay } from "swiper/modules";
 import { useRef, useState } from "react";
+import CustomSwiperBtn from "../../components/customSwiper/CustomSwiperBtn.jsx";
 
 const HomeSec1 = () => {
     const [currentIndex, setCurrentIndex] = useState(1);
@@ -18,6 +19,7 @@ const HomeSec1 = () => {
                     <a href="/" className="w-full overflow-hidden rounded-md">
                         <img
                             src={communityImages.mainImg}
+                            alt="메인이미지"
                             className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                         />
                     </a>
@@ -60,7 +62,7 @@ const HomeSec1 = () => {
                                     <a href="/">
                                         <img
                                             src={item}
-                                            alt=""
+                                            alt={`slide-${index} 이미지`}
                                             className="object-cover"
                                         />
                                     </a>
@@ -74,45 +76,10 @@ const HomeSec1 = () => {
                             </span>
                         </div>
                     </Swiper>
-                        <button
-                            onClick={() => swiperInstance.current.slidePrev()}
-                            className="opacity-0 group-hover:opacity-100 transition-opacity duration-500 absolute top-1/2 -left-[1.75rem] z-10 bg-white w-12 h-12 rounded-full shadow-md"
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                strokeWidth="1.5"
-                                stroke="currentColor"
-                                className="w-7 absolute top-[0.6rem] left-2 "
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    d="M15.75 19.5 8.25 12l7.5-7.5"
-                                />
-                            </svg>
-                        </button>
-
-                        <button
-                            onClick={() => swiperInstance.current.slideNext()}
-                            className="opacity-0 group-hover:opacity-100 transition-opacity duration-500 absolute top-1/2 -right-[1.75rem] z-10 bg-white w-12 h-12 rounded-full shadow-md"
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                strokeWidth="1.5"
-                                stroke="currentColor"
-                                className="w-7 absolute top-[0.6rem] right-2"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                                />
-                            </svg>
-                        </button>
+                    <CustomSwiperBtn
+                        swiperInstance={swiperInstance}
+                        hover={true}
+                    />
                 </div>
             </div>
         </section>

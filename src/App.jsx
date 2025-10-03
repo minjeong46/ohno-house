@@ -1,7 +1,11 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Layout from "./components/Layout";
-import Home from "./pages/community/Home";
-import Shop from './pages/shopping/Home';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Layout from './components/Layout';
+import Home from './pages/community/Home';
+
+import Sign from './pages/signup/Signup';
+import Login from './pages/login/Login';
+import PasswordReset from './pages/login/ResetLayout';
+import Cart from './pages/shoppingCart/cart';
 
 const router = createBrowserRouter([
   {
@@ -17,15 +21,27 @@ const router = createBrowserRouter([
         element: <Shop />,
       },
       {
-        path: 'login',
-        // 여기에 element
+        path: 'cart',
+        element: <Cart />,
       },
     ],
+  },
+  {
+    path: '/sign',
+    element: <Sign />,
+  },
+  {
+    path: '/login',
+    element: <Login />,
+  },
+  {
+    path: '/password-reset',
+    element: <PasswordReset />,
   },
 ]);
 
 function App() {
-    return <RouterProvider router={router} />;
+  return <RouterProvider router={router} />;
 }
 
 export default App;
