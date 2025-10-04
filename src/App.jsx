@@ -5,6 +5,7 @@ import Sign from "./pages/signup/Signup";
 import Login from "./pages/login/Login";
 import PasswordReset from "./pages/login/ResetLayout";
 import Cart from "./pages/shoppingCart/cart";
+import Imsi from "./components/Imsi";
 
 const router = createBrowserRouter([
     {
@@ -16,13 +17,17 @@ const router = createBrowserRouter([
                 element: <Home />,
             },
             {
+                path: "home/none/:id",
+                element: <Imsi />
+            },
+            {
                 path: "shop",
                 // 여기에 element
             },
             {
                 path: "cart",
-                element: <Cart />
-            }
+                element: <Cart />,
+            },
         ],
     },
     {
