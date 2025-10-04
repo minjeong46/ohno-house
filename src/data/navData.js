@@ -7,10 +7,6 @@ export const navLinkPath = [
             path: "/shop",
             name: "쇼핑",
         },
-        {
-            path: "/none",
-            name: "인테리어/생활",
-        },
     ];
 
 export const tabLinkPath = [
