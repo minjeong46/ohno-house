@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
 
 const Cart = () => {
     const { cart } = useSelector((state) => state.user);
-    console.log(cart[0]);
 
     return (
         <div className="max-w-[1256px] mx-auto pb-10 flex justify-center">
@@ -41,8 +40,8 @@ const Cart = () => {
                     </button>
                 </div>
                 {
-                    cart.map((item)=>{
-                        return <CartCard product={item.product} />
+                   cart && cart.map((item)=>{
+                        return <CartCard product={item.product} quantity={item.quantity} />
                     })
                 }
             </div>
