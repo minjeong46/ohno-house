@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { closeModal, openModal } from '../../store/modalSlice';
 import { MinusIcon } from '@heroicons/react/24/outline';
 import { PlusIcon } from '@heroicons/react/24/outline';
+import { showToast } from '../../store/toastSlice';
+import { addToCart } from '../../store/userSlice';
 
 const getDateString = (daysOffset) => {
   const date = new Date();
@@ -28,6 +30,7 @@ const ProductDetailModal = ({ product }) => {
   const dispatch = useDispatch();
 
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+  const userData = useSelector((state) => state.user.data);
 
   const MAX_STOCK = product.stock || 99;
 
@@ -51,24 +54,46 @@ const ProductDetailModal = ({ product }) => {
   };
 
   const handleClose = () => {
-      dispatch(closeModal());
+    dispatch(closeModal());
   };
 
   const buy = () => {
-    alert('구매완료!');
+    if (!isLoggedIn) {
+      dispatch(
+        showToast({
+          message: '로그인 후 이용이 가능합니다.',
+          type: 'error',
+        })
+      );
+    } else {
+      alert('구매완료!');
+      handleClose();
+    }
+  };
+
+  const openCartSuccessModal = () => {
+    dispatch(
+      openModal({
+        type: 'cartSuccess',
+      })
+    );
   };
 
   const handleAddToCart = () => {
     if (!isLoggedIn) {
-      alert('장바구니 이용을 위해 로그인이 필요합니다.');
       dispatch(
-        openModal({
-          type: 'LOGIN_REQUIRED',
+        showToast({
+          message: '로그인 후 이용이 가능합니다.',
+          type: 'error',
         })
       );
     } else {
-      alert(`${product.name} 상품 ${count}개를 장바구니에 담았습니다!`);
-      handleClose();
+      const cartItem = {
+        product: product,
+        quantity: count,
+      };
+      dispatch(addToCart({ item: cartItem, userEmail: userData?.email }));
+      openCartSuccessModal();
     }
   };
 
