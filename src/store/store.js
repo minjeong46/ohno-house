@@ -2,6 +2,7 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import userReducer from "./userSlice";
 import usersReducer from "./usersSlice";
 import modalReducer from "./modalSlice";
+import toastReducer from './toastSlice';
 import {
     persistStore,
     persistReducer,
@@ -19,13 +20,14 @@ import storage from "redux-persist/lib/storage";
 const persistConfig = {
     key: "root",
     storage,
-    whitelist: ["user", "users"],
+    whitelist: ["user", "users","modal","toast"],
 };
 
 const rootReducer = combineReducers({
-    user: userReducer,
-    users: usersReducer,
-    modal: modalReducer,
+  user: userReducer,
+  users: usersReducer,
+  modal: modalReducer,
+  toast: toastReducer,
 });
 
 //userReducer를 persistConfig로 래핑
