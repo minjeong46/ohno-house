@@ -7,9 +7,11 @@ import { useRef } from "react";
 import { useDispatch } from "react-redux";
 import { openModal } from "../../store/modalSlice.js";
 
-const CartCard = () => {
+const CartCard = ({ product }) => {
     const amountRef = useRef(1);
     const dispatch = useDispatch();
+
+    console.log(product);
 
     const minusQuantityHandler = () => {
         if (Number(amountRef.current.value) !== 1) {
