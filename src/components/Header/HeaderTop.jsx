@@ -55,6 +55,7 @@ const HeaderTop = ({
                                     >
                                         <NavLink
                                             to={nav.path}
+                                            end
                                             className={() => {
                                                 const isCommunity =
                                                     path.pathname === "/" ||
@@ -62,8 +63,9 @@ const HeaderTop = ({
                                                         "/home"
                                                     );
                                                 const isShop =
+                                                    path.pathname === "/shop" ||
                                                     path.pathname.startsWith(
-                                                        "/shop"
+                                                        "/shop/"
                                                     );
 
                                                 const active =

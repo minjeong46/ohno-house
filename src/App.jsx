@@ -1,6 +1,8 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "./components/Layout";
 import Home from "./pages/community/Home";
+import Shop from "./pages/shopping/Home";
+
 import Sign from "./pages/signup/Signup";
 import Login from "./pages/login/Login";
 import PasswordReset from "./pages/login/ResetLayout";
@@ -18,15 +20,23 @@ const router = createBrowserRouter([
             },
             {
                 path: "home/none/:id",
-                element: <Imsi />
+                element: <Imsi />,
             },
             {
                 path: "shop",
-                // 여기에 element
+                element: <Shop />,
+            },
+            {
+                path: "shop/none/:id",
+                element: <Imsi />,
             },
             {
                 path: "cart",
                 element: <Cart />,
+            },
+            {
+                path: "none",
+                element: <Imsi />,
             },
         ],
     },

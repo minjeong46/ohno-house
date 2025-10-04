@@ -10,7 +10,12 @@ const TabNav = ({ tabList }) => {
                         key={`${index}-${tab.name}`}
                     >
                         <NavLink
-                            to={tab.path.indexOf("/none") !== -1 ? `${tab.path}/${index}` : tab.path}
+                            to={
+                                tab.path.indexOf("/none") !== -1
+                                    ? `${tab.path}/${index}`
+                                    : tab.path
+                            }
+                            end
                             className={({ isActive }) =>
                                 `py-3 px-[6px] hover:text-[#11A5FD] ${
                                     isActive
