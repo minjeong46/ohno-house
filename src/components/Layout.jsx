@@ -5,7 +5,9 @@ import Sidebar from "./Sidebar";
 import { useState } from "react";
 import CartAmountModal from "./Modal/CartAmountModal";
 import ProductDetailModal from "./Modal/ProductDetailModal"
+import CartSuccessModal from './Modal/CartSuccessModal'
 import { useSelector } from "react-redux";
+import Toast from './Toast';
 
 const Layout = () => {
     const [isSidebar, setIsSidebar] = useState(false);
@@ -23,6 +25,8 @@ const Layout = () => {
         {isOpen && modalType === 'PRODUCT_DETAIL' && data?.product && (
           <ProductDetailModal product={data.product} />
         )}
+        {isOpen && modalType === 'cartSuccess' && <CartSuccessModal />}
+        <Toast />
       </div>
     );
 };
