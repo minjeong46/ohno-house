@@ -6,7 +6,7 @@ import { PlusIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { openModal } from "../../store/modalSlice.js";
-import { quantityChange } from "../../store/userSlice.js";
+import { quantityChange, removeToCart } from "../../store/userSlice.js";
 
 const CartCard = ({ product, quantity }) => {
     const [currentQuantity, setCurrentQuantity] = useState(quantity);
@@ -43,6 +43,14 @@ const CartCard = ({ product, quantity }) => {
         );
     };
 
+    const removeCartItemHandler = () => {
+        const item = {
+            product: product,
+            quantity: currentQuantity,
+        };
+        dispatch(removeToCart({ item: item }));
+    };
+
     const sellingPrice =
         product.originalPrice * (1 - product.discountRate / 100);
 
@@ -74,7 +82,7 @@ const CartCard = ({ product, quantity }) => {
                                     평일 16:00까지 결제시
                                 </p>
                             </span>
-                            <button>
+                            <button onClick={removeCartItemHandler}>
                                 <XMarkIcon className="h-4 w-4 text-gray-700 hover:text-gray-400" />
                             </button>
                         </div>

@@ -44,8 +44,15 @@ const userSlice = createSlice({
                 state.cart[existingItemIndex].quantity = quantity;
             }
         },
+        removeToCart: (state, action) => {
+            const { product } = action.payload.item;
+            state.cart = state.cart.filter(
+                (item) => item.product.id !== product.id
+            );
+        },
     },
 });
 
-export const { login, logout, addToCart, quantityChange } = userSlice.actions;
+export const { login, logout, addToCart, quantityChange, removeToCart } =
+    userSlice.actions;
 export default userSlice.reducer;
