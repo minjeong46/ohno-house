@@ -14,24 +14,24 @@ const CartCard = ({ product, quantity }) => {
 
     const minusQuantityHandler = () => {
         if (currentQuantity !== 1) {
-            const newQuantity = currentQuantity - 1;
-            setCurrentQuantity(newQuantity);
-            const item = {
-                product: product,
-                quantity: newQuantity,
-            };
-            dispatch(quantityChange({ item: item }));
+            setCurrentQuantity((prev) => {
+                const newQuantity = prev - 1;
+                dispatch(
+                    quantityChange({ item: { product, quantity: newQuantity } })
+                );
+                return newQuantity;
+            });
         }
     };
 
     const plusQuantityHandler = () => {
-        const newQuantity = currentQuantity + 1;
-        setCurrentQuantity(newQuantity);
-        const item = {
-            product: product,
-            quantity: newQuantity,
-        };
-        dispatch(quantityChange({ item: item }));
+        setCurrentQuantity((prev) => {
+            const newQuantity = prev + 1;
+            dispatch(
+                quantityChange({ item: { product, quantity: newQuantity } })
+            );
+            return newQuantity;
+        });
     };
 
     const quantityOnClickHandler = () => {
