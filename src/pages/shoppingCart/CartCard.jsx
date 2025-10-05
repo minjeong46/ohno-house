@@ -35,7 +35,12 @@ const CartCard = ({ product, quantity }) => {
     };
 
     const quantityOnClickHandler = () => {
-        dispatch(openModal({ type: "cartAmount" }));
+        dispatch(
+            openModal({
+                type: "cartAmount",
+                data: { product: product, quantity: currentQuantity },
+            })
+        );
     };
 
     const sellingPrice =
