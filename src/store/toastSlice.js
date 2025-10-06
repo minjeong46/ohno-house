@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   message: '',
   isVisible: false,
-  type: 'info', // info, success, error 등
+  type: 'info',
 };
 
 const toastSlice = createSlice({
@@ -17,10 +17,13 @@ const toastSlice = createSlice({
     },
     hideToast: (state) => {
       state.isVisible = false;
+    },
+    clearToastMessage: (state) => {
       state.message = '';
+      state.type = 'info';
     },
   },
 });
 
-export const { showToast, hideToast } = toastSlice.actions;
+export const { showToast, hideToast, clearToastMessage } = toastSlice.actions;
 export default toastSlice.reducer;

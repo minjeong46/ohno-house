@@ -9,17 +9,21 @@ const CartAmountModal = ({ product, quantity }) => {
     const dispatch = useDispatch();
 
     const quantityOnChangeHandler = (e) => {
-        setCurrentQuantity(e.target.value);
+      const value = e.target.value;
+      if (value === '' || /^\d+$/.test(value)) {
+        setCurrentQuantity(value);
+      }
     };
 
     const quantityChangeHandler = () => {
-        if (currentQuantity > 0) {
-            const newQuantity = currentQuantity;
-            dispatch(
-                quantityChange({ item: { product, quantity: newQuantity } })
-            );
-            dispatch(closeModal());
-        }
+      const newQuantity = Number(currentQuantity);
+
+      if (!isNaN(newQuantity) && newQuantity >= 1) {
+        dispatch(quantityChange({ item: { product, quantity: newQuantity } }));
+        dispatch(closeModal());
+      } else {
+        alert('수량은 1 이상의 숫자만 입력 가능합니다.');
+      }
     };
 
     return (

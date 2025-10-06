@@ -86,7 +86,7 @@ const Footer = () => {
           {/* 3. 회사 상세 정보 및 인증 마크 (Company Details & Certifications) */}
           <div className="md:col-span-3 lg:col-span-2 space-y-4 text-[11px] border-l border-[#EAEDEF] pl-8">
             <div className="text-[#828C94] leading-relaxed">
-              (주)버킷리스트 | 대표이사 이상민 | 서울 서초구 서초대로 어딘가에
+              (주)버킷리스트 | 대표이사 없음 | 서울 서초구 서초대로 어딘가에
               삼성생명서초타워 였으면 좋겠다{' '}
               <p>
                 supercoding@bucketlist.net | 사업자등록번호 123-45-678912{' '}
@@ -112,7 +112,7 @@ const Footer = () => {
                 <div className="flex items-center space-x-2">
                   <img src={FooterMark} alt="인증마크" className="w-6 h-6" />
                   <div className="text-m text-left">
-                    <p>오늘의집 서비스 운영</p>
+                    <p>오노의집 서비스 운영</p>
                     <p>2024.09.08 ~ 2027.09.07</p>
                   </div>
                 </div>
