@@ -14,6 +14,9 @@ const Cart = () => {
   const { cart } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const isCartEmpty = cart.length === 0;
+  const isAllChecked = cart.length > 0 && cart.every((item) => item.isChecked);
+  const selectedCount = cart.filter((item) => item.isChecked).length;
 
   const handleSelectAll = (e) => {
     const selectAll = e.target.checked;
@@ -40,7 +43,20 @@ const Cart = () => {
 
   if (isCartEmpty) {
     return (
+      <div className="max-w-[1256px] mx-auto pb-10 flex justify-center">
+        <div className="min-w-[814px] flex flex-col items-center py-20">
+          <h3 className="text-lg font-semibold text-gray-800">
+            장바구니에 담긴 상품이 없어요
+          </h3>
+          <p className="text-gray-500 text-sm mb-4">원하는 상품을 담아보세요</p>
+          <button
+            onClick={() => navigate('/shop')}
+            className="py-2.5 px-4 bg-sky-500 text-white rounded-md text-sm font-semibold hover:bg-sky-600 transition-colors"
+          >
+            상품 담으러 가기
+          </button>
         </div>
+      </div>
     );
   }
 
