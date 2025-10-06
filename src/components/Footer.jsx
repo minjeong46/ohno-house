@@ -108,12 +108,12 @@ const Footer = () => {
 
             {/* 인증 마크 */}
             <div className="flex items-center space-x-2">
-              <div className="text-[10px] w-[160px] h-[40px] border border-#828C94 p-1 text-center text-xs text-[#828C94]">
+              <div className="text-[10px] w-[160px] h-[40px] border border-#828C94 p-1 text-center text-[#828C94]">
                 <div className="flex items-center space-x-2">
                   <img src={FooterMark} alt="인증마크" className="w-6 h-6" />
-                  <div>
-                    <p className="text-left">오늘의집 서비스 운영</p>
-                    <p className="text-left">2024.09.08 ~ 2027.09.07</p>
+                  <div className="text-m text-left">
+                    <p>오늘의집 서비스 운영</p>
+                    <p>2024.09.08 ~ 2027.09.07</p>
                   </div>
                 </div>
               </div>
