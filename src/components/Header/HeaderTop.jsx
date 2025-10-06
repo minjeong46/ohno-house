@@ -19,7 +19,8 @@ const HeaderTop = ({
 }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
+    const path = 
+          ();
     const cart = useSelector((state) => state.user.cart);
     const user = useSelector((state) => state.user.userData); // userSlice에 userData 정보를 가져옴
     const isLoggedIn = !!user;
