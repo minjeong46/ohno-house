@@ -144,6 +144,10 @@ function Login() {
     showToastMessage('이메일 주소나 비밀번호가 틀립니다');
   };
 
+  const handleOpenComingSoon = () => {
+    showToastMessage('관리자에게 문의해 주세요.');
+  }
+
   const toggleOrderModal = (e) => {
     e.preventDefault();
     setShowOrderModal((prev) => !prev);
@@ -254,13 +258,13 @@ function Login() {
         </form>
         {/* 3. 추가 링크 영역 (비밀번호 재설정, 회원가입) */}
         <div className="text-sm flex justify-center space-x-4 mt-4 text-gray-600">
-          <a href="/password-reset">비밀번호 재설정</a>
+          <button onClick={handleOpenComingSoon}>비밀번호 재설정</button>
           <a href="/sign">회원가입</a>
         </div>
         <div className="text-center mt-8">
-          <a href="/#" className="text-xs text-gray-300 mb-5">
+          <button onClick={handleOpenComingSoon} className="text-xs text-gray-300 mb-5">
             로그인에 문제가 있으신가요?
-          </a>
+          </button>
         </div>
         {/* 5. 하단 기타 링크 및 저작권 */}
         <div className="text-center mt-6 pt-6 border-t border-gray-200 ">
