@@ -1,42 +1,65 @@
-import { cartImg, productImg } from "./images.js";
+import { cartImg } from "./images.js";
 import { CheckIcon } from "@heroicons/react/24/outline";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { MinusIcon } from "@heroicons/react/24/outline";
 import { PlusIcon } from "@heroicons/react/24/outline";
-import { useRef } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { openModal } from "../../store/modalSlice.js";
+import { quantityChange, removeToCart } from "../../store/userSlice.js";
 
-const CartCard = () => {
-    const amountRef = useRef(1);
+const CartCard = ({ product, quantity }) => {
+    const [currentQuantity, setCurrentQuantity] = useState(quantity);
     const dispatch = useDispatch();
 
     const minusQuantityHandler = () => {
-        if (Number(amountRef.current.value) !== 1) {
-            amountRef.current.value--;
-            console.log(amountRef.current.value);
+        if (currentQuantity !== 1) {
+            setCurrentQuantity((prev) => {
+                const newQuantity = prev - 1;
+                dispatch(
+                    quantityChange({ item: { product, quantity: newQuantity } })
+                );
+                return newQuantity;
+            });
         }
     };
 
     const plusQuantityHandler = () => {
-        amountRef.current.value++;
-        console.log(amountRef.current.value);
-    };
-
-    const quantityOnChangeHandler = (e) => {
-        amountRef.current.value = e.target.value;
+        setCurrentQuantity((prev) => {
+            const newQuantity = prev + 1;
+            dispatch(
+                quantityChange({ item: { product, quantity: newQuantity } })
+            );
+            return newQuantity;
+        });
     };
 
     const quantityOnClickHandler = () => {
-        dispatch(openModal({ type: "cartAmount" }));
+        dispatch(
+            openModal({
+                type: "cartAmount",
+                data: { product: product, quantity: currentQuantity },
+            })
+        );
     };
+
+    const removeCartItemHandler = () => {
+        const item = {
+            product: product,
+            quantity: currentQuantity,
+        };
+        dispatch(removeToCart({ item: item }));
+    };
+
+    const sellingPrice =
+        product.originalPrice * (1 - product.discountRate / 100);
 
     return (
         <ul className="border mt-3">
             <li>
                 <div className="px-4 py-3 flex items-center border-b justify-center">
                     <span className="text-sm text-gray-700">
-                        주식회사 세인코튼
+                        {product.brand}
                     </span>
                 </div>
                 <div className="px-4 py-5 flex gap-3">
@@ -59,19 +82,22 @@ const CartCard = () => {
                                     평일 16:00까지 결제시
                                 </p>
                             </span>
-                            <button>
+                            <button onClick={removeCartItemHandler}>
                                 <XMarkIcon className="h-4 w-4 text-gray-700 hover:text-gray-400" />
                             </button>
                         </div>
                         <div>
                             <a className="flex">
-                                <div>
-                                    <img src={productImg.productImg1} alt="" />
+                                <div className="overflow-hidden rounded-md">
+                                    <img
+                                        src={`../../..${product.imageUrl}`}
+                                        alt={product.name}
+                                        className="w-[72px] h-[72px]"
+                                    />
                                 </div>
                                 <div className="mx-3">
                                     <span className="text-sm">
-                                        [코튼리빙]
-                                        40수호텔컬렉션200g수건10장+유한젠 200ml
+                                        {product.name}
                                     </span>
                                     <span className="flex text-xs text-gray-400 mt-1">
                                         <p className="pr-2 border-r">
@@ -91,10 +117,8 @@ const CartCard = () => {
                                     />
                                 </button>
                                 <input
-                                    ref={amountRef}
-                                    defaultValue={1}
+                                    value={quantity}
                                     className="text-center max-w-[28px] py-1 rounded-md text-sm hover:bg-gray-300"
-                                    onChange={(e) => quantityOnChangeHandler(e)}
                                     onClick={quantityOnClickHandler}
                                 />
                                 <button>
@@ -104,14 +128,16 @@ const CartCard = () => {
                                     />
                                 </button>
                             </div>
-                            <span className="font-bold text-lg">30,000원</span>
+                            <span className="font-bold text-lg">
+                                {Math.round(sellingPrice).toLocaleString()}원
+                            </span>
                         </div>
                     </div>
                 </div>
                 <div className="border-t py-3">
                     <div className="w-full inline-flex gap-1 flex-col justify-center items-center">
                         <span className="text-sm text-gray-800">
-                            배송비 3,000원
+                            배송비 {product.shippingFee.toLocaleString()}원
                         </span>
                         <span className="text-xs text-gray-400">
                             같은 판매처 제품 3개 이상 구매 시 무료배송

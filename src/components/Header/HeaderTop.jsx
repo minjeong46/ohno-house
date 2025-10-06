@@ -1,6 +1,6 @@
 import { navLinkPath } from "../../data/navData.js";
 import logo from "../../../public/logo.svg";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import SearchInput from "../Header/SearchInput.jsx";
 import {
     MagnifyingGlassIcon,
@@ -19,8 +19,9 @@ const HeaderTop = ({
 }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const path = useLocation();
-
+    const path = 
+          ();
+    const cart = useSelector((state) => state.user.cart);
     const user = useSelector((state) => state.user.userData); // userSlice에 userData 정보를 가져옴
     const isLoggedIn = !!user;
     const handleLogout = (e) => {
@@ -55,31 +56,13 @@ const HeaderTop = ({
                                     >
                                         <NavLink
                                             to={nav.path}
-                                            end
-                                            className={() => {
-                                                const isCommunity =
-                                                    path.pathname === "/" ||
-                                                    path.pathname.startsWith(
-                                                        "/home"
-                                                    );
-                                                const isShop =
-                                                    path.pathname === "/shop" ||
-                                                    path.pathname.startsWith(
-                                                        "/shop/"
-                                                    );
-
-                                                const active =
-                                                    (nav.path === "/" &&
-                                                        isCommunity) ||
-                                                    (nav.path === "/shop" &&
-                                                        isShop);
-                                                return `hover:text-[#11A5FD] ${
-                                                    active
+                                            className={({ isActive }) =>
+                                                `hover:text-[#11A5FD] ${
+                                                    isActive
                                                         ? "text-[#11A5FD] font-bold"
                                                         : "text-gray-700"
-                                                }
-                        }`;
-                                            }}
+                                                }`
+                                            }
                                         >
                                             <span className="text-lg">
                                                 {nav.name}
@@ -107,7 +90,11 @@ const HeaderTop = ({
                                 </a>
                                 <a href="/cart" className="p-2 relative">
                                     <ShoppingCartIcon className="w-6 h-6 text-gray-700 hover:text-[#11A5FD] cursor-pointer" />
-                                    <i className="absolute block w-4 h-4 rounded-lg bg-[#D48A84] top-1 right-1 before:content-['1'] before:absolute before:top-0 before:left-[5px] before:flex before:items-center before:justify-center before:text-white before:text-[10px]"></i>
+                                    {cart.length > 0 && (
+                                        <span className="absolute top-1 right-1 w-4 h-4 bg-[#D48A84] text-[10px] text-white flex items-center justify-center rounded-full">
+                                            {cart.length}
+                                        </span>
+                                    )}
                                 </a>
                             </div>
                             {!isLoggedIn ? (

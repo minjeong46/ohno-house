@@ -3,8 +3,10 @@ import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import { CheckIcon } from "@heroicons/react/24/outline";
 import CartPayList from "./CartPayList";
 import CartCard from "./CartCard";
+import { useSelector } from "react-redux";
 
 const Cart = () => {
+    const { cart } = useSelector((state) => state.user);
 
     return (
         <div className="max-w-[1256px] mx-auto pb-10 flex justify-center">
@@ -37,8 +39,11 @@ const Cart = () => {
                         <span className="text-sm text-gray-700">선택 삭제</span>
                     </button>
                 </div>
-                <CartCard />
-                <CartCard />
+                {
+                   cart && cart.map((item)=>{
+                        return <CartCard product={item.product} quantity={item.quantity} />
+                    })
+                }
             </div>
             <CartPayList />
         </div>
