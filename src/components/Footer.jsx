@@ -4,7 +4,7 @@ import RightSvg from '../assets/footer-right.svg';
 const Footer = () => {
   return (
     <footer className="w-full bg-[#F7F9FA] border-gray-200 pt-[40px] pb-[40px]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1256px] mx-auto px-4 sm:px-6 lg:px-[60px]">
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
           {/* 1. 고객센터 (Customer Service) */}
           <div>
