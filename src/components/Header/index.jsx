@@ -1,7 +1,7 @@
 import { useEffect, useReducer, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
-import HeaderTop from "./Header/HeaderTop.jsx";
-import HeaderBottom from "./Header/HeaderBottom.jsx";
+import HeaderTop from "./HeaderTop.jsx";
+import HeaderBottom from "./HeaderBottom.jsx";
 
 const initialSearchState = {
     isOpen: false,

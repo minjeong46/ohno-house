@@ -1,8 +1,7 @@
-import React from 'react';
 import { useDispatch } from 'react-redux';
-import { closeModal } from '../../store/modalSlice';
-import { useNavigate } from 'react-router-dom'; 
-import Modal from './Modal';
+import { closeModal } from '../../../store/modalSlice';
+import { useNavigate } from 'react-router-dom';
+import Modal from '../Base/Modal';
 
 const CartSuccessModal = () => {
   const dispatch = useDispatch();

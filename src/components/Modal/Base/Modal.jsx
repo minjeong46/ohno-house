@@ -1,6 +1,6 @@
 import ReactDOM from "react-dom";
-import BackDrop from "./BackDrop";
-import { closeModal } from "../../store/modalSlice";
+import Backdrop from "./Backdrop";
+import { closeModal } from "../../../store/modalSlice";
 import { useDispatch } from "react-redux";
 
 const Modal = ({ children, width, height }) => {
@@ -8,7 +8,7 @@ const Modal = ({ children, width, height }) => {
 
     return ReactDOM.createPortal(
         <>
-            <BackDrop />
+            <Backdrop />
             <div
                 className="fixed w-full h-full inset-0 flex items-center justify-center z-50"
                 onClick={() => dispatch(closeModal())}

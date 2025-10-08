@@ -1,5 +1,5 @@
 import { tabLinkPath, tabShopLinkPath } from "../../data/navData.js";
-import TabNav from "../Header/TabNav.jsx";
+import TabNav from "./TabNav.jsx";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 
 const HeaderBottom = ({ pathShop, setIsSidebar, scroll }) => {

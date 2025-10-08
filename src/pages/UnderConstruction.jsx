@@ -1,6 +1,4 @@
-import React from "react";
-
-const Imsi = () => {
+const UnderConstruction = () => {
     return (
         <h1 className="inline-block font-bold text-2xl text-[#11A5FD]">
             현재 페이지는 공사중 🚧 입니다.
@@ -8,4 +6,4 @@ const Imsi = () => {
     );
 };
 
-export default Imsi;
+export default UnderConstruction;

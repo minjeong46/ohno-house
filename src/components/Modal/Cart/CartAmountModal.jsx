@@ -1,8 +1,8 @@
 import { useDispatch } from "react-redux";
-import { closeModal } from "../../store/modalSlice";
-import Modal from "./Modal";
+import { closeModal } from "../../../store/modalSlice";
+import Modal from "../Base/Modal";
 import { useState } from "react";
-import { quantityChange } from "../../store/userSlice";
+import { quantityChange } from "../../../store/userSlice";
 
 const CartAmountModal = ({ product, quantity }) => {
     const [currentQuantity, setCurrentQuantity] = useState(quantity);

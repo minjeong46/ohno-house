@@ -1,4 +1,3 @@
-import React from "react";
 import { interiorReview } from "../../data/community/HomeSec6Data.js";
 import SectionHeader from "../../pages/community/SectionHeader.jsx";
 

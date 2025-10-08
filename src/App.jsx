@@ -2,12 +2,11 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "./components/Layout";
 import Home from "./pages/community/Home";
 import Shop from "./pages/shopping/Home";
-
 import Sign from "./pages/signup/Signup";
 import Login from "./pages/login/Login";
 import PasswordReset from "./pages/login/ResetLayout";
-import Cart from "./pages/shoppingCart/cart";
-import Imsi from "./components/Imsi";
+import Cart from "./pages/shoppingCart/Cart";
+import UnderConstruction from "./pages/UnderConstruction";
 
 const router = createBrowserRouter([
     {
@@ -20,7 +19,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "home/none/:id",
-                element: <Imsi />,
+                element: <UnderConstruction />,
             },
             {
                 path: "shop",
@@ -28,7 +27,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "shop/none/:id",
-                element: <Imsi />,
+                element: <UnderConstruction />,
             },
             {
                 path: "cart",
@@ -36,7 +35,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "none",
-                element: <Imsi />,
+                element: <UnderConstruction />,
             },
         ],
     },
