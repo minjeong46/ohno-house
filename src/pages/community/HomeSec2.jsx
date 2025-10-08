@@ -10,7 +10,7 @@ const HomeSec2 = () => {
                         <li key={`${index}-${item}`}>
                             <a href="/" className="flex flex-col">
                                 <img src={item.img} alt={item.label} className="max-w-[88px] mb-3" />
-                                <span className="text-center font-light">{item.label}</span>
+                                <span className="text-center text-gray-600">{item.label}</span>
                             </a>
                         </li>
                     );
