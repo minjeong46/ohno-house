@@ -17,9 +17,9 @@ const TabNav = ({ tabList }) => {
                             }
                             end
                             className={({ isActive }) =>
-                                `py-3 px-[6px] hover:text-[#11A5FD] ${
+                                `py-3 px-[6px] hover:text-primary ${
                                     isActive
-                                        ? "text-[#11A5FD] before:absolute before:w-full before:h-[2px] before:bg-[#11A5FD] before:bottom-0 before:right-0"
+                                        ? "text-primary before:absolute before:w-full before:h-[2px] before:bg-primary before:bottom-0 before:right-0"
                                         : "text-gray-700"
                                 }`
                             }

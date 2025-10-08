@@ -55,9 +55,9 @@ const HeaderTop = ({
                                         <NavLink
                                             to={nav.path}
                                             className={({ isActive }) =>
-                                                `hover:text-[#11A5FD] ${
+                                                `hover:text-primary ${
                                                     isActive
-                                                        ? "text-[#11A5FD] font-bold"
+                                                        ? "text-primary font-bold"
                                                         : "text-gray-700"
                                                 }`
                                             }
@@ -84,10 +84,10 @@ const HeaderTop = ({
                         <div className="flex">
                             <div className="flex">
                                 <a className="p-2 block lg:hidden">
-                                    <MagnifyingGlassIcon className="w-6 h-6 text-gray-700 hover:text-[#11A5FD] cursor-pointer" />
+                                    <MagnifyingGlassIcon className="w-6 h-6 text-gray-700 hover:text-primary cursor-pointer" />
                                 </a>
                                 <a href="/cart" className="p-2 relative">
-                                    <ShoppingCartIcon className="w-6 h-6 text-gray-700 hover:text-[#11A5FD] cursor-pointer" />
+                                    <ShoppingCartIcon className="w-6 h-6 text-gray-700 hover:text-primary cursor-pointer" />
                                     {cart.length > 0 && (
                                         <span className="absolute top-1 right-1 w-4 h-4 bg-[#D48A84] text-[10px] text-white flex items-center justify-center rounded-full">
                                             {cart.length}
@@ -123,7 +123,7 @@ const HeaderTop = ({
                         </div>
                         {/* 로그인 시 아이콘 변동 */}
                     </div>
-                    <button className=" bg-[#11A5FD] py-2 px-4 text-[14px] text-white rounded-md flex items-center hover:bg-[#0198ED]">
+                    <button className="bg-primary py-2 px-4 text-[14px] text-white rounded-md flex items-center hover:bg-hoverPrimary">
                         <span className="pr-1 whitespace-nowrap">글쓰기</span>
                         <i>
                             <ChevronDownIcon className="h-5 w-5 text-white hidden lg:block" />

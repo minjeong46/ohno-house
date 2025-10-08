@@ -129,7 +129,7 @@ const CartPayList = () => {
         )}
         <button
           type="button"
-          className="w-full text-white py-3 bg-[#11A5FD] rounded-md hover:bg-[#0198ED]"
+          className="w-full text-white py-3 bg-primary rounded-md hover:bg-hoverPrimary"
         >
           {cart.length}개 상품 구매하기
         </button>

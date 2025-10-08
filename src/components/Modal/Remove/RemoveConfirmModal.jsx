@@ -35,7 +35,7 @@ const RemoveConfirmModal = ({ product, quantity }) => {
                 </button>
                 <button
                     onClick={handleConfirmRemove}
-                    className="h-[50px] w-[50%] bg-[#11A5FD] rounded-md text-white hover:bg-[#0198ED] font-semibold"
+                    className="h-[50px] w-[50%] bg-primary rounded-md text-white hover:bg-hoverPrimary font-semibold"
                 >
                     삭제
                 </button>

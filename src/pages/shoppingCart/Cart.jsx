@@ -88,7 +88,7 @@ const Cart = () => {
               checked={isAllChecked}
               onChange={handleSelectAll}
             />
-            <span className="w-5 h-5 rounded-md border border-gray-400 flex items-center justify-center peer-checked:bg-[#11A5FD] peer-checked:border-[#11A5FD]">
+            <span className="w-5 h-5 rounded-md border border-gray-400 flex items-center justify-center peer-checked:bg-primary peer-checked:border-primary">
               <CheckIcon className="h-4 w-4 text-white" />
             </span>
             <span className="ml-2 text-sm text-gray-700">전체 선택</span>

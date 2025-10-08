@@ -588,7 +588,7 @@ const Signup = () => {
 
           <button
             type="submit"
-            className="text-m w-full h-12 p-2 text-white text-lg font-bold bg-[#35C5F0] rounded-md hover:bg-[#11A5FD] transition-colors"
+            className="text-m w-full h-12 p-2 text-white text-lg font-bold bg-[#35C5F0] rounded-md hover:bg-primary transition-colors"
           >
             회원가입하기
           </button>

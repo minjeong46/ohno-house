@@ -52,7 +52,7 @@ const CartAmountModal = ({ product, quantity }) => {
                 </button>
                 <button
                     onClick={quantityChangeHandler}
-                    className="h-[50px] border-md w-[50%] bg-[#11A5FD] rounded-md text-white hover:bg-[#0198ED]"
+                    className="h-[50px] border-md w-[50%] bg-primary rounded-md text-white hover:bg-hoverPrimary"
                 >
                     확인
                 </button>

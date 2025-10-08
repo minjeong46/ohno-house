@@ -6,7 +6,7 @@ const SectionHeader = ({ title, subTitle }) => {
                 {subTitle && <p className="text-sm font-light">{subTitle}</p>}
             </div>
             <div>
-                <span className="font-bold text-[#11A5FD]">
+                <span className="font-bold text-primary">
                     <a href="/">더보기</a>
                 </span>
             </div>
