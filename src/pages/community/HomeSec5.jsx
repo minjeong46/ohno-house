@@ -1,6 +1,6 @@
 import { categoryProduct } from "../../data/community/HomeSec5Data.js";
 import SectionHeader from "./SectionHeader.jsx";
-import CustomSwiper from "../../components/CustomSwiper/CustomSwiper.jsx";
+import CustomSwiper from "../../components/CustomSwiper/CustomSwiperBase.jsx";
 
 const HomeSec5 = () => {
     return (

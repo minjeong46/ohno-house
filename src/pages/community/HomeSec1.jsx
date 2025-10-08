@@ -2,16 +2,9 @@ import { communityImages, slide } from "../../data/community/HomeSec1Data.js";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Navigation, Autoplay } from "swiper/modules";
-import { useRef, useState } from "react";
-import CustomSwiperBtn from "../../components/customSwiper/CustomSwiperBtn.jsx";
+import CustomSwiperMore from "../../components/CustomSwiper/CustomSwiperMore.jsx";
 
 const HomeSec1 = () => {
-    const [currentIndex, setCurrentIndex] = useState(1);
-
-    const swiperInstance = useRef(null);
-
     return (
         <section className="w-full px-[60px]">
             <div className="flex w-full h-[508px]">
@@ -35,50 +28,20 @@ const HomeSec1 = () => {
                     </div>
                 </div>
                 <div className="flex flex-grow flex-shrink basis-[270px] ml-5 relative group">
-                    <Swiper
-                        autoplay={{
-                            delay: 5000,
-                            disableOnInteraction: false,
-                        }}
-                        pagination={{
-                            el: ".custom-page",
-                            clickable: true,
-                        }}
-                        navigation={false}
-                        modules={[Autoplay, Pagination, Navigation]}
-                        loop={true}
-                        onSwiper={(swiper) => (swiperInstance.current = swiper)}
-                        onActiveIndexChange={(swiper) => {
-                            setCurrentIndex(swiper.realIndex + 1);
-                        }}
-                        className="w-[269px]"
-                    >
-                        {slide.map((item, index) => {
-                            return (
-                                <SwiperSlide
-                                    key={index}
-                                    className="overflow-hidden rounded-md"
-                                >
-                                    <a href="/">
-                                        <img
-                                            src={item}
-                                            alt={`slide-${index} 이미지`}
-                                            className="object-cover"
-                                        />
-                                    </a>
-                                </SwiperSlide>
-                            );
-                        })}
-
-                        <div className="custom-pagination absolute bottom-3 right-3 flex justify-center items-center w-[4.5rem] h-6 z-10 bg-black bg-opacity-50 rounded-xl ">
-                            <span className="text-white text-sm font-bold">
-                                {`${currentIndex} / ${slide.length} +`}
-                            </span>
-                        </div>
-                    </Swiper>
-                    <CustomSwiperBtn
-                        swiperInstance={swiperInstance}
-                        hover={true}
+                    <CustomSwiperMore
+                        slideItem={slide}
+                        width={"269px"}
+                        render={(item, index) => (
+                            <a href="/">
+                                <div className="overflow-hidden rounded-md relative">
+                                    <img
+                                        src={item}
+                                        alt={`slide-${index} 이미지`}
+                                        className="object-cover"
+                                    />
+                                </div>
+                            </a>
+                        )}
                     />
                 </div>
             </div>

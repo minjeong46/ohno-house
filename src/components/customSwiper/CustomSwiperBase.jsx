@@ -6,7 +6,7 @@ import { Pagination, Navigation, Autoplay } from "swiper/modules";
 import { useRef, useState } from "react";
 import CustomSwiperBtn from "./CustomSwiperBtn";
 
-const CustomSwiper = ({
+const CustomSwiperBase = ({
     PerView,
     PerGroup,
     spaceBetween,
@@ -52,4 +52,4 @@ const CustomSwiper = ({
     );
 };
 
-export default CustomSwiper;
+export default CustomSwiperBase;
