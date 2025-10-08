@@ -284,7 +284,7 @@ const ProductDetailModal = ({ product }) => {
                                 장바구니
                             </button>
                             <button
-                                className="h-12 w-40 bg-[#11A5FD] rounded-md text-white font-semibold hover:bg-[#0199ED]"
+                                className="h-12 w-40 bg-primary rounded-md text-white font-semibold hover:bg-hoverPrimary"
                                 onClick={buy}
                             >
                                 바로구매

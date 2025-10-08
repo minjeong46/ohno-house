@@ -4,8 +4,6 @@ import "swiper/css/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation, Autoplay } from "swiper/modules";
 import { useRef, useState } from "react";
-import { ChevronRightIcon } from "@heroicons/react/24/outline";
-import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 import CustomSwiperBtn from "./CustomSwiperBtn";
 
 const CustomSwiper = ({

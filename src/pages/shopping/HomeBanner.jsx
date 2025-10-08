@@ -1,6 +1,6 @@
 // src/components/HomeBanner.jsx (간소화 버전)
 
-import React, { useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import { homeBanners, ArrowIcons } from '../shopping/images'; // 이미지 경로는 유지

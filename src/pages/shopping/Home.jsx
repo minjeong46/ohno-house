@@ -1,4 +1,3 @@
-import React from 'react';
 import HomeBanner from '../shopping/HomeBanner';
 import CategoryList from '../shopping/CategoryList';
 import ProductSection from '../shopping/ProductSection';

@@ -1,7 +1,6 @@
 import ScrapIcon from "../assets/community/scrap.svg";
 import ScrapIconFill from "../assets/community/scrap-fill.svg";
 import { useState } from "react";
-import ProductDetailModal from "../components/Modal/Product/ProductDetailModal.jsx";
 import { useDispatch } from "react-redux";
 import { openModal } from "../store/modalSlice.js";
 

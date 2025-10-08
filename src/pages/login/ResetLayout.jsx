@@ -1,4 +1,3 @@
-import React from 'react';
 import PasswordReset from '../login/PasswordReset'; 
 import Header from '../../components/Header';
 
