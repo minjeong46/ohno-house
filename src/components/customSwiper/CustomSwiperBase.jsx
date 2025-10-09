@@ -14,6 +14,7 @@ const CustomSwiperBase = ({
     slideItem,
     render,
     plusViewSlide,
+    breakpoints,
 }) => {
     const swiperInstance = useRef(null);
     const [isBeginning, setIsBeginning] = useState(true);
@@ -25,8 +26,6 @@ const CustomSwiperBase = ({
                 modules={[Autoplay, Pagination, Navigation]}
                 navigation={false}
                 watchOverflow={true}
-                slidesPerView={PerView}
-                slidesPerGroup={PerGroup}
                 spaceBetween={spaceBetween}
                 speed={speed}
                 onSwiper={(swiper) => (swiperInstance.current = swiper)}
@@ -34,11 +33,14 @@ const CustomSwiperBase = ({
                     setIsBeginning(swiper.isBeginning);
                     setIsEnd(swiper.isEnd);
                 }}
+                breakpoints={breakpoints}
                 className="relative"
             >
                 {slideItem.map((item, index) => {
                     return (
-                        <SwiperSlide key={index}>{render(item, index)}</SwiperSlide>
+                        <SwiperSlide key={index}>
+                            {render(item, index)}
+                        </SwiperSlide>
                     );
                 })}
                 {plusViewSlide && <SwiperSlide>{plusViewSlide}</SwiperSlide>}

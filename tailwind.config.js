@@ -16,6 +16,15 @@ export default {
                 hoverPrimary: "#0198ED",
             },
         },
+        screens: {
+            xs: "365px",
+            sm: "460px",
+            md: "640px",
+            lg: "1024px",
+            xl: "1256px",
+            "2xl": "1536px",
+            "max-xs": { max: "350px" },
+        },
     },
     plugins: [],
 };

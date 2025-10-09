@@ -3,7 +3,7 @@ import SectionHeader from "../../pages/community/SectionHeader.jsx";
 
 const HomeSec6 = () => {
     return (
-        <section className="w-full px-[60px] mb-[40px]">
+        <section className="max-w-[1256px] mx-auto lg:px-[60px] px-[40px] mb-[40px]">
             <SectionHeader title={"유저들의 인테리어 시공 리뷰"} />
             <div className="grid grid-cols-3 gap-5">
                 {interiorReview.map((item, index) => {

@@ -3,43 +3,10 @@ import { useLocation } from "react-router-dom";
 import HeaderTop from "./HeaderTop.jsx";
 import HeaderBottom from "./HeaderBottom.jsx";
 
-const initialSearchState = {
-    isOpen: false,
-    hasInput: false,
-};
-
-const searchReducer = (state, action) => {
-    switch (action.type) {
-        case "OPEN":
-            return { ...state, isOpen: true };
-        case "CLOSE":
-            return { ...state, isOpen: false };
-        case "INPUT_VALID":
-            return { ...state, hasInput: action.value.trim().length > 0 };
-        case "INPUT_CLEAR":
-            return { ...state, hasInput: false };
-        default:
-            return state;
-    }
-};
-
 const Header = ({ setIsSidebar }) => {
-    const searchInputRef = useRef();
     const [scroll, setScroll] = useState(false);
     const path = useLocation();
     const [pathShop, setPathShop] = useState(false);
-
-    const [searchState, dispatchSearch] = useReducer(
-        searchReducer,
-        initialSearchState
-    );
-
-    const clearClickHandler = () => {
-        if (searchInputRef.current) {
-            searchInputRef.current.value = "";
-        }
-        dispatchSearch({ type: "INPUT_CLEAR" });
-    };
 
     useEffect(() => {
         if (path.pathname !== "/cart") {
@@ -69,12 +36,7 @@ const Header = ({ setIsSidebar }) => {
     return (
         <header className="h-header-total w-full relative bg-white group">
             {/* 상단 */}
-            <HeaderTop
-                searchInputRef={searchInputRef}
-                dispatchSearch={dispatchSearch}
-                searchState={searchState}
-                clearClickHandler={clearClickHandler}
-            />
+            <HeaderTop />
             {/* 하단 */}
             <HeaderBottom
                 pathShop={pathShop}

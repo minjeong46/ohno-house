@@ -16,9 +16,9 @@ const Layout = () => {
     const { isOpen, modalType, data } = useSelector((state) => state.modal);
 
     return (
-        <div className="w-screen min-h-screen relative flex flex-col">
+        <div className="w-full min-h-screen relative flex flex-col">
             <Header setIsSidebar={setIsSidebar} />
-            <main className="flex-1 max-w-[1256px] mx-auto my-7 ">
+            <main className="flex-none basis-auto my-7">
                 <Outlet />
             </main>
             <Footer />

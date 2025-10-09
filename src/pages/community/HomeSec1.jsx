@@ -6,17 +6,20 @@ import CustomSwiperMore from "../../components/CustomSwiper/CustomSwiperMore.jsx
 
 const HomeSec1 = () => {
     return (
-        <section className="w-full px-[60px]">
-            <div className="flex w-full h-[508px]">
-                <div className="flex flex-grow flex-shrink basis-[847px] relative">
-                    <a href="/" className="w-full overflow-hidden rounded-md">
+        <section className="max-w-[1256px] mx-auto lg:px-[60px] px-[40px]">
+            <div className="flex items-stretch w-full gap-5">
+                <div className="flex-[3] min-w-[498px] relative ">
+                    <a
+                        href="/"
+                        className="block w-full h-full overflow-hidden rounded-md"
+                    >
                         <img
                             src={communityImages.mainImg}
                             alt="메인이미지"
                             className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                         />
                     </a>
-                    <div className="h-[150px] absolute bottom-0 left-0 flex flex-col justify-end px-7 py-7 text-white">
+                    <div className="absolute bottom-0 left-0 flex flex-col justify-end px-7 py-7 text-white">
                         <span className="text-3xl font-bold">
                             광고미술감독이 반한 채광 맛집, 유니크한
                             스타일링까지!
@@ -27,17 +30,16 @@ const HomeSec1 = () => {
                         </span>
                     </div>
                 </div>
-                <div className="flex flex-grow flex-shrink basis-[270px] ml-5 relative group">
+                <div className="flex-[1] min-w-[158px] h-full relative group">
                     <CustomSwiperMore
                         slideItem={slide}
-                        width={"269px"}
                         render={(item, index) => (
-                            <a href="/">
-                                <div className="overflow-hidden rounded-md relative">
+                            <a href="/" className="block w-full h-full">
+                                <div className="w-fit h-full overflow-hidden rounded-md relative">
                                     <img
                                         src={item}
                                         alt={`slide-${index} 이미지`}
-                                        className="object-cover"
+                                        className="w-full h-full object-cover"
                                     />
                                 </div>
                             </a>

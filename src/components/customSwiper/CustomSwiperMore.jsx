@@ -12,13 +12,12 @@ const CustomSwiperMore = ({
     loop = true,
     render,
     autoplay = { delay: 3000, disableOnInteraction: false },
-    width,
 }) => {
     const swiperInstance = useRef(null);
     const [currentIndex, setCurrentIndex] = useState(1);
 
     return (
-        <div className="w-full relative">
+        <div className="w-full h-full relative">
             <Swiper
                 modules={[Autoplay, Pagination, Navigation]}
                 navigation={false}
@@ -29,8 +28,8 @@ const CustomSwiperMore = ({
                 onActiveIndexChange={(swiper) => {
                     setCurrentIndex(swiper.realIndex + 1);
                 }}
+                className="relative w-full h-full"
                 autoplay={autoplay}
-                className={`w-[${width}]`}
             >
                 {slideItem.map((item, index) => {
                     return (

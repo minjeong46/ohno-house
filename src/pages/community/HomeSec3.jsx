@@ -2,28 +2,30 @@ import { interiorSlide } from "../../data/community/HomeSec3Data.js";
 import scrap from "../../assets/community/scrap.svg";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import SectionHeader from "./SectionHeader.jsx";
-import CustomSwiper from "../../components/CustomSwiper/CustomSwiperBase.jsx";
+import CustomSwiperBase from "../../components/CustomSwiper/CustomSwiperBase.jsx";
 
 const HomeSec3 = () => {
     return (
-        <section className="w-full px-[60px] mb-[40px]">
+        <section className="max-w-[1256px] mx-auto lg:px-[60px] px-[40px] mb-[40px]">
             <SectionHeader
                 title={"이런 사진 찾고 있나요?"}
                 subTitle={"좋아하실 만한 인테리어 콘텐츠를 추천해드려요"}
             />
-            <CustomSwiper
-                PerView={6}
-                PerGroup={6}
+            <CustomSwiperBase
                 spaceBetween={20}
                 speed={500}
+                breakpoints={{
+                    0: { slidesPerView: 4, slidesPerGroup: 4 },
+                    1024: { slidesPerView: 6, slidesPerGroup: 6 },
+                }}
                 slideItem={interiorSlide}
                 render={(item) => (
-                    <a href="/" className="w-[calc(16.6667% - 16.6667px)] ">
+                    <a href="/">
                         <div className="overflow-hidden rounded-md relative">
                             <img
                                 src={item.img}
                                 alt={`${item.nickname} 인테리어 이미지`}
-                                className="h-[230px] object-cover hover:scale-105 transition-transform duration-300"
+                                className="h-[230px] w-full object-cover hover:scale-105 transition-transform duration-300"
                             />
 
                             <div className="absolute bottom-2 w-full flex justify-between px-2">

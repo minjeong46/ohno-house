@@ -11,8 +11,7 @@ import slide9 from "../../assets/community/community-sec1-s9.png";
 import slide10 from "../../assets/community/community-sec1-s10.png";
 import slide11 from "../../assets/community/community-sec1-s11.png";
 import slide12 from "../../assets/community/community-sec1-s12.png";
-import slide13 from "../../assets/community/community-sec1-s13.png";
-import slide14 from "../../assets/community/community-sec1-s14.png";
+
 
 export const communityImages = {
     mainImg,
@@ -31,6 +30,4 @@ export const slide = [
     slide10,
     slide11,
     slide12,
-    slide13,
-    slide14,
 ];

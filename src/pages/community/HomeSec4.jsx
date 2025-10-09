@@ -4,7 +4,7 @@ import SectionHeader from "./SectionHeader.jsx";
 
 const HomeSec4 = () => {
     return (
-        <section className="w-full px-[60px] mb-[40px]">
+        <section className="max-w-[1256px] mx-auto lg:px-[60px] px-[40px] mb-[40px]">
             <SectionHeader title={"오늘의 추천 집들이 구경해보세요🧐"} />
             <div className="grid grid-cols-4 gap-5">
                 {todayHouse.map((item, index) => {
