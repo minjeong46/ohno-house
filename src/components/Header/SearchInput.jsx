@@ -4,7 +4,7 @@ import {
     XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { XCircleIcon } from "@heroicons/react/24/solid";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
     inputClear,
@@ -24,14 +24,17 @@ const SearchInput = () => {
 
     useEffect(() => {
         const OutSideClickHandler = (e) => {
-            if(containerRef.current && !containerRef.current.contains(e.target)){
-                dispatch(searchClose())
+            if (
+                containerRef.current &&
+                !containerRef.current.contains(e.target)
+            ) {
+                dispatch(searchClose());
             }
         };
         document.addEventListener("mousedown", OutSideClickHandler);
         return () => {
-            document.removeEventListener("mousedown", OutSideClickHandler)
-        }
+            document.removeEventListener("mousedown", OutSideClickHandler);
+        };
     }, [dispatch]);
 
     const clearClickHandler = () => {
@@ -51,7 +54,10 @@ const SearchInput = () => {
     };
 
     return (
-        <div ref={containerRef} className="xl:w-80 w-52 border rounded-md px-3 py-2 xl:mr-4 mr-2 relative hidden lg:block">
+        <div
+            ref={containerRef}
+            className="xl:w-80 w-52 border rounded-md px-3 py-2 xl:mr-4 mr-2 relative hidden lg:block"
+        >
             <div className="h-full flex items-center">
                 <MagnifyingGlassIcon className="h-6 w-6 text-gray-400" />
                 <input

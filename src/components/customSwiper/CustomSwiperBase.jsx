@@ -7,8 +7,6 @@ import { useRef, useState } from "react";
 import CustomSwiperBtn from "./CustomSwiperBtn";
 
 const CustomSwiperBase = ({
-    PerView,
-    PerGroup,
     spaceBetween,
     speed,
     slideItem,

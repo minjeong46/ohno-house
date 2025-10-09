@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import HeaderTop from "./HeaderTop.jsx";
 import HeaderBottom from "./HeaderBottom.jsx";
