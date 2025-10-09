@@ -4,20 +4,35 @@ import {
     XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { XCircleIcon } from "@heroicons/react/24/solid";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
     inputClear,
     inputValid,
     searchClose,
+    searchDataPush,
     searchOpen,
+    searchDataRemove,
+    searchDataAllRemove,
 } from "../../store/searchSlice";
 
 const SearchInput = () => {
     const searchInputRef = useRef();
-    const [searchData, setSearchData] = useState([]);
+    const containerRef = useRef();
     const dispatch = useDispatch();
-    const { isOpen, hasInput } = useSelector((state) => state.search);
+    const { isOpen, hasInput, data } = useSelector((state) => state.search);
+
+    useEffect(() => {
+        const OutSideClickHandler = (e) => {
+            if(containerRef.current && !containerRef.current.contains(e.target)){
+                dispatch(searchClose())
+            }
+        };
+        document.addEventListener("mousedown", OutSideClickHandler);
+        return () => {
+            document.removeEventListener("mousedown", OutSideClickHandler)
+        }
+    }, [dispatch]);
 
     const clearClickHandler = () => {
         if (searchInputRef.current) {
@@ -26,8 +41,17 @@ const SearchInput = () => {
         dispatch(inputClear());
     };
 
+    const dataSearch = (e) => {
+        if (e.key === "Enter" && !e.nativeEvent.isComposing) {
+            console.log("dispatch 실행");
+            e.preventDefault();
+            dispatch(searchDataPush({ data: searchInputRef.current.value }));
+            searchInputRef.current.value = "";
+        }
+    };
+
     return (
-        <div className="xl:w-80 w-52 border rounded-md px-3 py-2 xl:mr-4 mr-2 relative hidden lg:block">
+        <div ref={containerRef} className="xl:w-80 w-52 border rounded-md px-3 py-2 xl:mr-4 mr-2 relative hidden lg:block">
             <div className="h-full flex items-center">
                 <MagnifyingGlassIcon className="h-6 w-6 text-gray-400" />
                 <input
@@ -36,10 +60,10 @@ const SearchInput = () => {
                     placeholder="통합검색"
                     className="w-full ml-2 outline-none text-[16px]"
                     onClick={() => dispatch(searchOpen())}
-                    onBlur={() => dispatch(searchClose())}
                     onChange={(e) =>
                         dispatch(inputValid({ data: e.target.value }))
                     }
+                    onKeyDown={(e) => dataSearch(e)}
                 />
                 {hasInput && (
                     <button onClick={clearClickHandler}>
@@ -51,20 +75,48 @@ const SearchInput = () => {
                 <div className="w-full absolute top-[42px] left-0 border py-1 rounded-md bg-white">
                     <div className="py-2 px-4 flex justify-between">
                         <span className="text-xs">최근 검색어</span>
-                        <button className="text-xs text-gray-400">
+                        <button
+                            onClick={() => dispatch(searchDataAllRemove())}
+                            className="text-xs text-gray-400"
+                        >
                             전체 삭제
                         </button>
                     </div>
                     <ul className="w-full">
-                        <li className="py-2 px-4 w-full flex justify-between items-center bg-[#fbfbfb] cursor-pointer">
-                            <div className="flex items-center">
-                                <ClockIcon className="h-5 w-5 text-gray-500" />
-                                <span className="text-sm ml-2">서랍장</span>
-                            </div>
-                            <button>
-                                <XMarkIcon className="h-5 w-5 text-gray-500" />
-                            </button>
-                        </li>
+                        {data.length > 0 ? (
+                            data.map((data, index) => {
+                                return (
+                                    <li
+                                        key={`${data}-${index}`}
+                                        className="py-2 px-4 w-full flex justify-between items-center hover:bg-[#fbfbfb] cursor-pointer"
+                                    >
+                                        <div className="flex items-center">
+                                            <ClockIcon className="h-5 w-5 text-gray-500" />
+                                            <span className="text-sm ml-2">
+                                                {data}
+                                            </span>
+                                        </div>
+                                        <button
+                                            onClick={() =>
+                                                dispatch(
+                                                    searchDataRemove({
+                                                        data: data,
+                                                    })
+                                                )
+                                            }
+                                        >
+                                            <XMarkIcon className="h-5 w-5 text-gray-500" />
+                                        </button>
+                                    </li>
+                                );
+                            })
+                        ) : (
+                            <li className="py-2 px-4 w-full flex justify-between items-center cursor-pointer">
+                                <span className="text-sm">
+                                    최근 검색어 없음
+                                </span>
+                            </li>
+                        )}
                     </ul>
                 </div>
             )}
