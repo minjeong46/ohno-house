@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import DUMMY_PRODUCTS from "../../data/productData";
-import ProductCard from "../../components/Modal/Product/ProductCard";
+import ProductCard from "../../components/ProductCard";
 
 const ITEMS_PER_LOAD = 8;
 const PRODUCT_COUNT = DUMMY_PRODUCTS.length;
