@@ -7,6 +7,7 @@ import { ChevronDownIcon } from "@heroicons/react/24/outline";
 const HeaderBottom = ({ pathShop, setIsSidebar, isSidebar, scroll }) => {
     const sidebarBtnRef = useRef(null);
 
+
     return (
         <div
             className={`fixed top-header-top left-0 w-full z-30 bg-white border-b transition-transform duration-300 ${
@@ -16,7 +17,7 @@ const HeaderBottom = ({ pathShop, setIsSidebar, isSidebar, scroll }) => {
             }
                     `}
         >
-            <div className="max-w-[1256px] mx-auto px-10 lg:px-14 flex items-center justify-between sticky">
+            <div className="max-w-[1256px] mx-auto px-10 lg:px-14 flex items-center justify-between sticky max-[950px]:overflow-x-scroll overflow-auto ">
                 <nav className="flex flex-grow flex-shrink-0">
                     <TabNav
                         tabList={pathShop ? tabShopLinkPath : tabLinkPath}
