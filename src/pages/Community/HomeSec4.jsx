@@ -1,6 +1,6 @@
 import { todayHouse } from "../../data/community/HomeSec4Data.js";
 import scrap from "../../assets/community/scrap.svg";
-import SectionHeader from "./SectionHeader.js";
+import SectionHeader from "./SectionHeader.jsx";
 
 const HomeSec4 = () => {
     return (

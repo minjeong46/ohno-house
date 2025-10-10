@@ -1,10 +1,10 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "./components/Layout";
 import Home from "./pages/Community/Home";
-import Shop from "./pages/shopping/Home";
+import Shop from "./pages/Shopping/Home";
 import Sign from "./pages/Signup/Signup";
-import Login from "./pages/login/Login";
-import PasswordReset from "./pages/login/ResetLayout";
+import Login from "./pages/Login/Login";
+import PasswordReset from "./pages/Login/ResetLayout";
 import Cart from "./pages/ShoppingCart/Cart";
 import UnderConstruction from "./pages/UnderConstruction";
 
