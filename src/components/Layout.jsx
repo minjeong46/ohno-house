@@ -1,7 +1,6 @@
 import Header from "./Header/index.jsx";
 import Footer from "./Footer";
 import { Outlet } from "react-router-dom";
-import Sidebar from "./Sidebar";
 import { useState } from "react";
 import CartAmountModal from "./Modal/Cart/CartAmountModal.jsx";
 import ProductDetailModal from "./Modal/Product/ProductDetailModal";
@@ -16,34 +15,36 @@ const Layout = () => {
     const { isOpen, modalType, data } = useSelector((state) => state.modal);
 
     return (
-        <div className="w-full min-h-screen relative flex flex-col">
-            <Header setIsSidebar={setIsSidebar} />
-            <main className="flex-none basis-auto my-7">
-                <Outlet />
-            </main>
-            <Footer />
-            {isSidebar && <Sidebar setIsSidebar={setIsSidebar} />}
-            {isOpen && modalType === "cartAmount" && (
-                <CartAmountModal
-                    product={data.product}
-                    quantity={data.quantity}
-                />
-            )}
-            {isOpen && modalType === "PRODUCT_DETAIL" && data?.product && (
-                <ProductDetailModal product={data.product} />
-            )}
-            {isOpen && modalType === "cartSuccess" && <CartSuccessModal />}
-            {isOpen && modalType === "confirmRemove" && data?.product && (
-                <RemoveConfirmModal
-                    product={data.product}
-                    quantity={data.quantity}
-                />
-            )}
-            {isOpen && modalType === "confirmRemoveSelected" && (
-                <RemoveSelectedConfirmModal />
-            )}
-            <Toast />
-        </div>
+        <>
+            <div className="w-full min-h-screen relative flex flex-col">
+                <Header isSidebar={isSidebar} setIsSidebar={setIsSidebar} />
+                <main className="max-w-[1256px] xl:mx-auto my-7 relative">
+                    <Outlet />
+                </main>
+                <Footer />
+
+                {isOpen && modalType === "cartAmount" && (
+                    <CartAmountModal
+                        product={data.product}
+                        quantity={data.quantity}
+                    />
+                )}
+                {isOpen && modalType === "PRODUCT_DETAIL" && data?.product && (
+                    <ProductDetailModal product={data.product} />
+                )}
+                {isOpen && modalType === "cartSuccess" && <CartSuccessModal />}
+                {isOpen && modalType === "confirmRemove" && data?.product && (
+                    <RemoveConfirmModal
+                        product={data.product}
+                        quantity={data.quantity}
+                    />
+                )}
+                {isOpen && modalType === "confirmRemoveSelected" && (
+                    <RemoveSelectedConfirmModal />
+                )}
+                <Toast />
+            </div>
+        </>
     );
 };
 
