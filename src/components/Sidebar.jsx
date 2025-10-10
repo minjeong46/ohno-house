@@ -5,7 +5,7 @@ import { createPortal } from "react-dom";
 
 const Sidebar = ({ setIsSidebar, sidebarBtnRef }) => {
     const sidebarRef = useRef();
-    const [position, setPosition] = useState({ top: 0, left: 0 });
+    const [position, setPosition] = useState({ top: 0, right: 0 });
 
     useOutSideClick(sidebarRef, () => setIsSidebar(false));
 
@@ -33,7 +33,7 @@ const Sidebar = ({ setIsSidebar, sidebarBtnRef }) => {
     return createPortal(
         <div
             ref={sidebarRef}
-            className="fixed bg-white border w-[268px] border-gray-200 rounded-md shadow-md z-[110] "
+            className="fixed bg-white border w-[268px] border-gray-200 rounded-md shadow-md z-[110] transition-all ease-in-out duration-300"
             style={{
                 top: `${position.top}px`,
                 left: `${position.left}px`,
