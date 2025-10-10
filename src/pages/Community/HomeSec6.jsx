@@ -1,5 +1,5 @@
 import { interiorReview } from "../../data/community/HomeSec6Data.js";
-import SectionHeader from "./SectionHeader.jsx";
+import SectionHeader from "./SectionHeader.js";
 
 const HomeSec6 = () => {
     return (
