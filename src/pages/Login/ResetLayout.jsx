@@ -1,4 +1,4 @@
-import PasswordReset from '../login/PasswordReset'; 
+import PasswordReset from './PasswordReset'; 
 import Header from '../../components/Header';
 
 function ResetLayout() {
