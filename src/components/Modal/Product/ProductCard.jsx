@@ -1,8 +1,8 @@
-import ScrapIcon from "../assets/community/scrap.svg";
-import ScrapIconFill from "../assets/community/scrap-fill.svg";
+import ScrapIcon from "../../../assets/community/scrap.svg";
+import ScrapIconFill from "../../../assets/community/scrap-fill.svg";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { openModal } from "../store/modalSlice.js";
+import { openModal } from "../../../store/modalSlice.js";
 
 const ProductCard = ({ product }) => {
     const [isScrapped, setIsScrapped] = useState(true);
