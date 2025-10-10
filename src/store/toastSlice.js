@@ -5,7 +5,7 @@ const initialState = {
   isVisible: false,
   type: 'info',
 };
-
+ 
 const toastSlice = createSlice({
   name: 'toast',
   initialState,

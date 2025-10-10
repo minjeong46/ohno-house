@@ -4,7 +4,7 @@ import {
     XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { XCircleIcon } from "@heroicons/react/24/solid";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
     inputClear,
@@ -15,6 +15,7 @@ import {
     searchDataRemove,
     searchDataAllRemove,
 } from "../../store/searchSlice";
+import { useOutSideClick } from "../../hooks/useOutSideClick";
 
 const SearchInput = () => {
     const searchInputRef = useRef();
@@ -22,20 +23,22 @@ const SearchInput = () => {
     const dispatch = useDispatch();
     const { isOpen, hasInput, data } = useSelector((state) => state.search);
 
-    useEffect(() => {
-        const OutSideClickHandler = (e) => {
-            if (
-                containerRef.current &&
-                !containerRef.current.contains(e.target)
-            ) {
-                dispatch(searchClose());
-            }
-        };
-        document.addEventListener("mousedown", OutSideClickHandler);
-        return () => {
-            document.removeEventListener("mousedown", OutSideClickHandler);
-        };
-    }, [dispatch]);
+    // useEffect(() => {
+    //     const OutSideClickHandler = (e) => {
+    //         if (
+    //             containerRef.current &&
+    //             !containerRef.current.contains(e.target)
+    //         ) {
+    //             dispatch(searchClose());
+    //         }
+    //     };
+    //     document.addEventListener("mousedown", OutSideClickHandler);
+    //     return () => {
+    //         document.removeEventListener("mousedown", OutSideClickHandler);
+    //     };
+    // }, [dispatch]);
+
+    useOutSideClick(containerRef, () => dispatch(searchClose()))
 
     const clearClickHandler = () => {
         if (searchInputRef.current) {
@@ -46,7 +49,6 @@ const SearchInput = () => {
 
     const dataSearch = (e) => {
         if (e.key === "Enter" && !e.nativeEvent.isComposing) {
-            console.log("dispatch 실행");
             e.preventDefault();
             dispatch(searchDataPush({ data: searchInputRef.current.value }));
             searchInputRef.current.value = "";

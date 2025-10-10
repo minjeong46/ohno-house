@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import HeaderTop from "./HeaderTop.jsx";
 import HeaderBottom from "./HeaderBottom.jsx";
 
-const Header = ({ setIsSidebar }) => {
+const Header = ({ isSidebar, setIsSidebar }) => {
     const [scroll, setScroll] = useState(false);
     const path = useLocation();
     const [pathShop, setPathShop] = useState(false);
@@ -34,7 +34,7 @@ const Header = ({ setIsSidebar }) => {
     }, [path]);
 
     return (
-        <header className="h-header-total w-full relative bg-white group">
+        <header className="h-header-total w-full bg-white group">
             {/* 상단 */}
             <HeaderTop />
             {/* 하단 */}
@@ -42,6 +42,7 @@ const Header = ({ setIsSidebar }) => {
                 pathShop={pathShop}
                 setIsSidebar={setIsSidebar}
                 scroll={scroll}
+                isSidebar={isSidebar}
             />
         </header>
     );
