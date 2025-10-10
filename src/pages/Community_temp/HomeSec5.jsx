@@ -1,6 +1,6 @@
 import { categoryProduct } from "../../data/community/HomeSec5Data.js";
 import SectionHeader from "./SectionHeader.jsx";
-import CustomSwiperBase from "../../components/CustomSwiper/CustomSwiperBase.jsx";
+import CustomSwiperBase from "../../components/CustomSwiper_temp/CustomSwiperBase.jsx";
 
 const HomeSec5 = () => {
     return (
@@ -8,9 +8,9 @@ const HomeSec5 = () => {
             <SectionHeader title={"카테고리별 상품 찾기"} />
             <CustomSwiperBase
                 breakpoints={{
-                    0: { slidesPerView: 6, slidesPerGroup: 13},
-                    640 : {slidesPerView: 8, slidesPerGroup: 13},
-                    860 : {slidesPerView: 10, slidesPerGroup: 13},
+                    0: { slidesPerView: 6, slidesPerGroup: 13 },
+                    640: { slidesPerView: 8, slidesPerGroup: 13 },
+                    860: { slidesPerView: 10, slidesPerGroup: 13 },
                     1024: { slidesPerView: 13, slidesPerGroup: 13 },
                 }}
                 spaceBetween={12}

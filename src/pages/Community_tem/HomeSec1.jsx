@@ -2,7 +2,7 @@ import { communityImages, slide } from "../../data/community/HomeSec1Data.js";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import CustomSwiperMore from "../../components/CustomSwiper/CustomSwiperMore.jsx";
+import CustomSwiperMore from "../../components/CustomSwiper_temp/CustomSwiperMore.jsx";
 
 const HomeSec1 = () => {
     return (
