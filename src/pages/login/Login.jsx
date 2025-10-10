@@ -115,7 +115,7 @@ function Login() {
     }
 
     setShowToast(false);
-    setIsExitingUp(false);
+    // setIsExitingUp(false);
     setIsToastFullyShown(false);
 
     setTimeout(() => {
@@ -125,13 +125,13 @@ function Login() {
         setIsToastFullyShown(true);
       }, 50);
 
-      setTimeout(() => {
-        setIsExitingUp(true);
-      }, 1500 + 50);
+    //   setTimeout(() => {
+    //     setIsExitingUp(true);
+    //   }, 1500 + 50);
 
       const timer3 = setTimeout(() => {
         setShowToast(false);
-        setIsExitingUp(false);
+        // setIsExitingUp(false);
         setIsToastFullyShown(false);
         toastTimer.current = null;
       }, 1500 + 50 + 400);
