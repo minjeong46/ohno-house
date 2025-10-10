@@ -1,5 +1,5 @@
-import HomeBanner from '../shopping/HomeBanner';
-import ProductSection from '../shopping/ProductSection';
+import HomeBanner from '../Shopping/HomeBanner';
+import ProductSection from '../Shopping/ProductSection';
 
 function Home() {
   return (

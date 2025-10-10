@@ -7,7 +7,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { toggleAllItems } from "../../store/userSlice";
 import { openModal } from "../../store/modalSlice";
 import { showToast } from "../../store/toastSlice";
-import { ShoppingBagIcon } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router-dom";
 
 const Cart = () => {

@@ -3,7 +3,7 @@
 import { useRef, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
-import { homeBanners, ArrowIcons } from '../shopping/images'; // 이미지 경로는 유지
+import { homeBanners, ArrowIcons } from '../Shopping/images'; // 이미지 경로는 유지
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
