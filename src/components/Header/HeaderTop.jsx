@@ -1,6 +1,6 @@
 import { navLinkPath } from "../../data/navData.js";
 import logo from "../../../public/logo.svg";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import SearchInput from "./SearchInput.jsx";
 import {
     MagnifyingGlassIcon,
@@ -98,13 +98,13 @@ const HeaderTop = ({
                             {!isLoggedIn ? (
                                 <div className="text-gray-600 text-sm flex items-center whitespace-nowrap cursor-pointer">
                                     <span className="px-2 border-r">
-                                        <a href="/login">로그인</a>
+                                        <Link to="/login">로그인</Link>
                                     </span>
                                     <span className="px-2 border-0 xl:border-r">
-                                        <a href="/sign">회원가입</a>
+                                        <Link to="/sign">회원가입</Link>
                                     </span>
                                     <span className="px-2 hidden xl:block">
-                                        <a href="/">고객센터</a>
+                                        <Link to="/">고객센터</Link>
                                     </span>
                                 </div>
                             ) : (
