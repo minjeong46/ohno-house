@@ -1,6 +1,7 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import DUMMY_PRODUCTS from "../../data/productData";
 import ProductCard from "../../components/ProductCard";
+import ProductFilter from "./ProductFilterList";
 
 const ITEMS_PER_LOAD = 8;
 const PRODUCT_COUNT = DUMMY_PRODUCTS.length;
@@ -11,15 +12,26 @@ const ProductSection = () => {
     const [activeTab, setActiveTab] = useState("추천");
     const tabs = ["추천", "예쁜", "유용한", "귀여운", "오늘의딜"];
 
-    const repeatedProducts = Array.from({ length: itemsToShow }, (_, index) => {
-        const productIndex = index % PRODUCT_COUNT;
-        const originalProduct = products[productIndex];
+    const repeatedProducts = useMemo(() => {
+        const filterTabProducts = products.filter(
+            (item) =>
+                Array.isArray(item.tabFilter) &&
+                item.tabFilter.includes(activeTab)
+        );
 
-        return {
-            ...originalProduct,
-            id: `${originalProduct.id}_${Math.floor(index / PRODUCT_COUNT)}`,
-        };
-    });
+        const baseProducts =
+            filterTabProducts.length > 0 ? filterTabProducts : products;
+
+        return Array.from({ length: itemsToShow }, (_, index) => {
+            const productIndex = index % baseProducts.length;
+            const originalProduct = baseProducts[productIndex];
+
+            return {
+                ...originalProduct,
+                id: `${originalProduct.id}_${Math.floor(index / baseProducts)}`,
+            };
+        });
+    }, [activeTab, products, itemsToShow]);
 
     const handleScroll = useCallback(() => {
         const scrollHeight = window.innerHeight + window.scrollY;
@@ -59,12 +71,14 @@ const ProductSection = () => {
 
     return (
         <div className="container mx-auto px-10 py-8">
-            <div className="flex space-x-2 overflow-x-auto whitespace-nowrap mb-5">
-                {tabs.map(renderTabButton)}
-            </div>
-            <div className="flex flex-wrap -mx-2">
+            <ProductFilter tabs={tabs} renderTabButton={renderTabButton} />
+            <div key={activeTab} className="flex flex-wrap -mx-2">
                 {repeatedProducts.map((product) => (
-                    <ProductCard key={product.id} product={product} />
+                    <ProductCard
+                        key={product.id}
+                        product={product}
+                        activeTab={activeTab}
+                    />
                 ))}
 
                 <div className="w-full text-center py-10 text-sky-600 text-sm">
