@@ -13,6 +13,7 @@ const DUMMY_PRODUCTS = [
     rating: 4.8,
     reviewCount: 15200,
     timestamp: '2025-09-30T10:00:00Z',
+    tabFilter: ["추천","유용한"],
   },
   // --- 002: 커트러리 ---
   {
@@ -28,6 +29,7 @@ const DUMMY_PRODUCTS = [
     rating: 4.9,
     reviewCount: 9750,
     timestamp: '2025-08-25T14:30:00Z',
+    tabFilter: ["추천","유용한"],
   },
   // --- 003: 이불세트 ---
   {
@@ -43,6 +45,7 @@ const DUMMY_PRODUCTS = [
     rating: 4.6,
     reviewCount: 720,
     timestamp: '2025-06-10T09:15:00Z',
+    tabFilter: ["추천","유용한","예쁜"],
   },
   // --- 004: 이불세트 ---
   {
@@ -58,6 +61,7 @@ const DUMMY_PRODUCTS = [
     rating: 4.7,
     reviewCount: 3880,
     timestamp: '2025-07-01T18:00:00Z',
+    tabFilter: ["추천","유용한","예쁜"],
   },
   // --- 005: 러그 ---
   {
@@ -73,6 +77,7 @@ const DUMMY_PRODUCTS = [
     rating: 4.2,
     reviewCount: 450,
     timestamp: '2025-03-15T12:45:00Z',
+    tabFilter: ["추천","유용한"],
   },
   // --- 006: 이불세트 ---
   {
@@ -88,6 +93,7 @@ const DUMMY_PRODUCTS = [
     rating: 4.4,
     reviewCount: 1200,
     timestamp: '2025-09-05T16:20:00Z',
+    tabFilter: ["추천","예쁜","귀여운"],
   },
   // --- 007: 암막커튼 ---
   {
@@ -104,6 +110,7 @@ const DUMMY_PRODUCTS = [
     rating: 4.6,
     reviewCount: 2150,
     timestamp: '2025-02-28T11:00:00Z',
+    tabFilter: ["추천","예쁜","귀여운"],
   },
   // --- 008: 욕실선반 ---
   {
@@ -119,6 +126,7 @@ const DUMMY_PRODUCTS = [
     rating: 4.0,
     reviewCount: 320,
     timestamp: '2025-04-12T13:50:00Z',
+    tabFilter: ["추천","유용한","오늘의딜"],
   },
   // --- 009: 이불세트 ---
   {
@@ -135,6 +143,7 @@ const DUMMY_PRODUCTS = [
     rating: 4.9,
     reviewCount: 11000,
     timestamp: '2025-09-18T19:40:00Z',
+    tabFilter: ["추천","유용한","귀여운","오늘의딜"],
   },
   // --- 010: 러그/카페트 ---
   {
@@ -150,6 +159,7 @@ const DUMMY_PRODUCTS = [
     rating: 4.3,
     reviewCount: 1500,
     timestamp: '2025-05-05T08:25:00Z',
+    tabFilter: ["추천","유용한","예쁜","귀여운"],
   },
   // --- 011: 블라인드 ---
   {
@@ -165,6 +175,7 @@ const DUMMY_PRODUCTS = [
     rating: 4.5,
     reviewCount: 850,
     timestamp: '2025-03-22T17:10:00Z',
+    tabFilter: ["추천","유용한"],
   },
   // --- 012: 욕실화 ---
   {
@@ -180,6 +191,7 @@ const DUMMY_PRODUCTS = [
     rating: 4.7,
     reviewCount: 6500,
     timestamp: '2025-01-15T10:55:00Z',
+    tabFilter: ["추천","유용한"],
   },
   // --- 013: 빨래바구니 ---
   {
@@ -195,6 +207,7 @@ const DUMMY_PRODUCTS = [
     rating: 4.9,
     reviewCount: 60200,
     timestamp: '2025-07-20T14:10:00Z',
+    tabFilter: ["추천","유용한","귀여운"],
   },
   // --- 014: 휴지통 ---
   {
@@ -210,6 +223,7 @@ const DUMMY_PRODUCTS = [
     rating: 4.1,
     reviewCount: 150,
     timestamp: '2025-08-01T09:30:00Z',
+    tabFilter: ["추천","유용한","예쁜","귀여운","오늘의딜"],
   },
   // --- 015: 이불세트 ---
   {
@@ -225,6 +239,7 @@ const DUMMY_PRODUCTS = [
     rating: 4.6,
     reviewCount: 4200,
     timestamp: '2025-06-25T15:00:00Z',
+    tabFilter: ["추천","유용한"],
   },
   // --- 016: 휴지통 ---
   {
@@ -241,6 +256,7 @@ const DUMMY_PRODUCTS = [
     rating: 4.3,
     reviewCount: 980,
     timestamp: '2025-09-10T11:45:00Z',
+    tabFilter: ["추천","유용한","예쁜","귀여운","오늘의딜"],
   },
   // --- 017: 발매트 ---
   {
@@ -256,6 +272,7 @@ const DUMMY_PRODUCTS = [
     rating: 4.5,
     reviewCount: 3050,
     timestamp: '2025-04-05T16:55:00Z',
+    tabFilter: ["추천","유용한","예쁜","귀여운","오늘의딜"],
   },
   // --- 018: 이불세트 ---
   {
@@ -271,6 +288,7 @@ const DUMMY_PRODUCTS = [
     rating: 4.7,
     reviewCount: 2300,
     timestamp: '2025-07-12T13:20:00Z',
+    tabFilter: ["추천","유용한","예쁜","귀여운","오늘의딜"],
   },
   // --- 019: 러그/카페트 ---
   {
@@ -286,6 +304,7 @@ const DUMMY_PRODUCTS = [
     rating: 4.1,
     reviewCount: 650,
     timestamp: '2025-02-14T18:35:00Z',
+    tabFilter: ["추천","유용한","예쁜","귀여운","오늘의딜"],
   },
   // --- 020: 암막커튼 ---
   {
@@ -301,6 +320,7 @@ const DUMMY_PRODUCTS = [
     rating: 4.4,
     reviewCount: 390,
     timestamp: '2025-09-28T10:05:00Z',
+    tabFilter: ["추천","예쁜","오늘의딜"],
   },
 ];
 
