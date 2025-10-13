@@ -2,7 +2,7 @@ const DUMMY_PRODUCTS = [
   // --- 001: 수건 ---
   {
     id: 'PROD-001',
-    imageUrl: '/public/images/PROD-001.jpg',
+    imageUrl: '/images/PROD-001.jpg',
     brand: '호텔코튼',
     seller: '40수 호텔컬렉션 200g 수건 10장',
     name: '40수 순면 베이직 워싱 수건 5매 세트',
@@ -18,7 +18,7 @@ const DUMMY_PRODUCTS = [
   // --- 002: 커트러리 ---
   {
     id: 'PROD-002',
-    imageUrl: '/public/images/PROD-002.jpg',
+    imageUrl: '/images/PROD-002.jpg',
     brand: '퀴진드마망',
     seller: '식세기O / 퀴진드마망 커트러리 순수 4인 수저세트',
     name: '식기세척기 가능! 퀴진드마망 커트러리 4인 세트',
@@ -34,7 +34,7 @@ const DUMMY_PRODUCTS = [
   // --- 003: 이불세트 ---
   {
     id: 'PROD-003',
-    imageUrl: '/public/images/PROD-003.jpg',
+    imageUrl: '/images/PROD-003.jpg',
     brand: '빌로홈',
     seller: '빌로호텔 먼지없는 차렵이불세트 SS/Q/K 23color',
     name: '먼지없는 빌로호텔 차렵이불세트 (SS/Q/K)',
@@ -50,7 +50,7 @@ const DUMMY_PRODUCTS = [
   // --- 004: 이불세트 ---
   {
     id: 'PROD-004',
-    imageUrl: '/public/images/PROD-004.jpg',
+    imageUrl: '/images/PROD-004.jpg',
     brand: '스테이홈',
     seller: '복숭아 촉감 먼지없는 스테이 간절기/사계절/극세사 차렵이불세트',
     name: '복숭아 촉감! 스테이 사계절 차렵이불세트',
@@ -66,7 +66,7 @@ const DUMMY_PRODUCTS = [
   // --- 005: 러그 ---
   {
     id: 'PROD-005',
-    imageUrl: '/public/images/PROD-005.jpg',
+    imageUrl: '/images/PROD-005.jpg',
     brand: '하이랜드',
     seller: '하이랜드 루프 사이잘룩 러그 7size',
     name: '하이랜드 루프 사이잘룩 워셔블 러그 7size',
@@ -82,7 +82,7 @@ const DUMMY_PRODUCTS = [
   // --- 006: 이불세트 ---
   {
     id: 'PROD-006',
-    imageUrl: '/public/images/PROD-006.jpg',
+    imageUrl: '/images/PROD-006.jpg',
     brand: '옥수수맘',
     seller: 'NEW 카스테라 워싱 옥수수솜 사계절/한파용 차렵이불세트',
     name: 'NEW 카스테라 워싱 옥수수솜 사계절 이불세트',
@@ -98,7 +98,7 @@ const DUMMY_PRODUCTS = [
   // --- 007: 암막커튼 ---
   {
     id: 'PROD-007',
-    imageUrl: '/public/images/PROD-007.jpg',
+    imageUrl: '/images/PROD-007.jpg',
     brand: '퍼펙트홈',
     seller:
       '100% 완벽 자외선 빛차단 냉방유지 창문/거실/안방 아일렛/핀형 암막커튼',
@@ -115,7 +115,7 @@ const DUMMY_PRODUCTS = [
   // --- 008: 욕실선반 ---
   {
     id: 'PROD-008',
-    imageUrl: '/public/images/PROD-008.jpg',
+    imageUrl: '/images/PROD-008.jpg',
     brand: '노타공',
     seller: '무타공 접착식 욕실선반 코너형/일자형 2colors',
     name: '무타공 접착식 욕실선반 (코너/일자형)',
@@ -131,7 +131,7 @@ const DUMMY_PRODUCTS = [
   // --- 009: 이불세트 ---
   {
     id: 'PROD-009',
-    imageUrl: '/public/images/PROD-009.jpg',
+    imageUrl: '/images/PROD-009.jpg',
     brand: '유어메이트',
     seller:
       'NEW 높은 재구매율 퐁신퐁신 먼지없는 유어메이트 사계절/극세사 안심향균 차렵이불 풀세트',
@@ -148,7 +148,7 @@ const DUMMY_PRODUCTS = [
   // --- 010: 러그/카페트 ---
   {
     id: 'PROD-010',
-    imageUrl: '/public/images/PROD-010.jpg',
+    imageUrl: '/images/PROD-010.jpg',
     brand: '위드홈',
     seller: '헤링본 워셔블 사이잘록 사계절 러그 카페트 9size 8colors',
     name: '헤링본 워셔블 사계절 러그 카페트 (9size)',
@@ -164,7 +164,7 @@ const DUMMY_PRODUCTS = [
   // --- 011: 블라인드 ---
   {
     id: 'PROD-011',
-    imageUrl: '/public/images/PROD-011.jpg',
+    imageUrl: '/images/PROD-011.jpg',
     brand: '컬러창',
     seller: '25mm 알루미늄 블라인드 거실 창문 35colors',
     name: '25mm 알루미늄 블라인드 (35colors)',
@@ -180,7 +180,7 @@ const DUMMY_PRODUCTS = [
   // --- 012: 욕실화 ---
   {
     id: 'PROD-012',
-    imageUrl: '/public/images/PROD-012.jpg',
+    imageUrl: '/images/PROD-012.jpg',
     brand: '플랫슈즈',
     seller: '1+1 문에 안걸리는 양발 플랫 욕실화 4colors',
     name: '1+1 문에 안 걸리는 플랫 욕실화',
@@ -196,7 +196,7 @@ const DUMMY_PRODUCTS = [
   // --- 013: 빨래바구니 ---
   {
     id: 'PROD-013',
-    imageUrl: '/public/images/PROD-013.jpg',
+    imageUrl: '/images/PROD-013.jpg',
     brand: '모던하우스',
     seller: '리뷰 6만개! 모던 트롤리 스윙 3단 빨래바구니',
     name: '리뷰 6만개! 모던 트롤리 3단 빨래바구니',
@@ -212,7 +212,7 @@ const DUMMY_PRODUCTS = [
   // --- 014: 휴지통 ---
   {
     id: 'PROD-014',
-    imageUrl: '/public/images/PROD-014.jpg',
+    imageUrl: '/images/PROD-014.jpg',
     brand: '크림모너',
     seller: '크림컬러 모너스탠드 휴지통 10/20L (비닐포함) 냄새차단!',
     name: '냄새차단! 크림컬러 스탠드 휴지통 10/20L',
@@ -228,7 +228,7 @@ const DUMMY_PRODUCTS = [
   // --- 015: 이불세트 ---
   {
     id: 'PROD-015',
-    imageUrl: '/public/images/PROD-015.jpg',
+    imageUrl: '/images/PROD-015.jpg',
     brand: '두부이불',
     seller: 'NEW 두부처럼 몽글몽글한 두부이불 사계절 차렵이불세트 22colors',
     name: '몽글몽글 두부이불 사계절 차렵이불세트',
@@ -244,7 +244,7 @@ const DUMMY_PRODUCTS = [
   // --- 016: 휴지통 ---
   {
     id: 'PROD-016',
-    imageUrl: '/public/images/PROD-016.jpg',
+    imageUrl: '/images/PROD-016.jpg',
     brand: '살균센서',
     seller:
       '[30L 스텐 무광 신규출시!] 12시간마다 자동살균 스탠 430 센서 휴지통 20L/30L',
@@ -261,7 +261,7 @@ const DUMMY_PRODUCTS = [
   // --- 017: 발매트 ---
   {
     id: 'PROD-017',
-    imageUrl: '/public/images/PROD-017.jpg',
+    imageUrl: '/images/PROD-017.jpg',
     brand: '생활매트',
     seller: '국산 세탁가능 다용도 발매트 타원형 현관 욕실 주방 발매트 러그',
     name: '국산! 세탁가능 다용도 타원형 발매트',
@@ -277,7 +277,7 @@ const DUMMY_PRODUCTS = [
   // --- 018: 이불세트 ---
   {
     id: 'PROD-018',
-    imageUrl: '/public/images/PROD-018.jpg',
+    imageUrl: '/images/PROD-018.jpg',
     brand: '스트라이프홈',
     seller: '스트라이프 순면 향균 옥수수솜 사계절/간절기/여름 차렵이불 세트',
     name: '순면 향균 옥수수솜 스트라이프 차렵이불',
@@ -293,7 +293,7 @@ const DUMMY_PRODUCTS = [
   // --- 019: 러그/카페트 ---
   {
     id: 'PROD-019',
-    imageUrl: '/public/images/PROD-019.jpg',
+    imageUrl: '/images/PROD-019.jpg',
     brand: '이지케어',
     seller: '이지케어 워셔블 슬러브 러그 카페트',
     name: '이지케어 워셔블 슬러브 러그 카페트',
@@ -309,7 +309,7 @@ const DUMMY_PRODUCTS = [
   // --- 020: 암막커튼 ---
   {
     id: 'PROD-020',
-    imageUrl: '/public/images/PROD-020.jpg',
+    imageUrl: '/images/PROD-020.jpg',
     brand: '메리미데코',
     seller: '메리미 화이트 이중 레이스 암막커튼 2장세트 편형/ 아일렛형 4size',
     name: '메리미 화이트 이중 레이스 암막커튼 2장 세트',
