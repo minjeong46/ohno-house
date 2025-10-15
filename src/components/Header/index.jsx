@@ -36,7 +36,7 @@ const Header = ({ isSidebar, setIsSidebar }) => {
     return (
         <header className="h-header-total w-full bg-white group">
             {/* 상단 */}
-            <HeaderTop />
+            <HeaderTop path={path} />
             {/* 하단 */}
             <HeaderBottom
                 pathShop={pathShop}

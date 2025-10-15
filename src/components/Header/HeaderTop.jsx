@@ -16,6 +16,7 @@ const HeaderTop = ({
     dispatchSearch,
     searchState,
     clearClickHandler,
+    path,
 }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -54,13 +55,30 @@ const HeaderTop = ({
                                     >
                                         <NavLink
                                             to={nav.path}
-                                            className={({ isActive }) =>
-                                                `hover:text-primary ${
-                                                    isActive
+                                            className={() => {
+                                                const isCommunity =
+                                                    path.pathname === "/" ||
+                                                    path.pathname.startsWith(
+                                                        "/home"
+                                                    );
+                                                const isShop =
+                                                    path.pathname === "/shop" ||
+                                                    path.pathname.startsWith(
+                                                        "/shop/"
+                                                    );
+
+                                                const active =
+                                                    (nav.path === "/" &&
+                                                        isCommunity) ||
+                                                    (nav.path === "/shop" &&
+                                                        isShop);
+
+                                                return `hover:text-primary ${
+                                                    active
                                                         ? "text-primary font-bold"
                                                         : "text-gray-700"
-                                                }`
-                                            }
+                                                }`;
+                                            }}
                                         >
                                             <span className="text-lg">
                                                 {nav.name}
