@@ -4,7 +4,7 @@ export const useOutSideClick = (ref, handler) => {
     useEffect(() => {
         const OutSideClickHandler = (e) => {
             if (ref.current && !ref.current.contains(e.target)) {
-                handler(event);
+                handler();
             }
         };
         document.addEventListener("mousedown", OutSideClickHandler);
