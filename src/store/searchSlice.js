@@ -27,7 +27,7 @@ const searchSlice = createSlice({
                 (item) => item === action.payload.data
             );
             if (!existing) {
-                state.data.push(action.payload.data);
+                state.data.unshift(action.payload.data);
                 state.hasInput = false;
             }
         },
