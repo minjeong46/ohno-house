@@ -48,7 +48,7 @@ const SearchInput = () => {
     };
 
     const dataSearch = (e) => {
-        if (e.key === "Enter" && !e.nativeEvent.isComposing) {
+        if (e.key === "Enter" && !e.nativeEvent.isComposing && searchInputRef.current.value.trim() !== "" ) {
             e.preventDefault();
             dispatch(searchDataPush({ data: searchInputRef.current.value }));
             searchInputRef.current.value = "";
