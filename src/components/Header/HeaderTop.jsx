@@ -104,14 +104,14 @@ const HeaderTop = ({
                                 <a className="p-2 block lg:hidden">
                                     <MagnifyingGlassIcon className="w-6 h-6 text-gray-700 hover:text-primary cursor-pointer" />
                                 </a>
-                                <a href="/cart" className="p-2 relative">
+                                <Link to="/cart" className="p-2 relative">
                                     <ShoppingCartIcon className="w-6 h-6 text-gray-700 hover:text-primary cursor-pointer" />
                                     {cart.length > 0 && (
                                         <span className="absolute top-1 right-1 w-4 h-4 bg-[#D48A84] text-[10px] text-white flex items-center justify-center rounded-full">
                                             {cart.length}
                                         </span>
                                     )}
-                                </a>
+                                </Link>
                             </div>
                             {!isLoggedIn ? (
                                 <div className="text-gray-600 text-sm flex items-center whitespace-nowrap cursor-pointer">

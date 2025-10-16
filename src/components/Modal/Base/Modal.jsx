@@ -1,10 +1,22 @@
 import ReactDOM from "react-dom";
 import Backdrop from "./Backdrop";
 import { closeModal } from "../../../store/modalSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
+import { useEffect, useRef } from "react";
 
 const Modal = ({ children, width, height }) => {
+    const isOpen = useSelector((state) => state.modal.isOpen);
     const dispatch = useDispatch();
+    const location = useLocation();
+    const prevPath = useRef(location.pathname);
+
+    useEffect(() => {
+        if (isOpen && prevPath.current !== location.pathname) {
+            dispatch(closeModal());
+        }
+        prevPath.current = location.pathname;
+    }, [location.pathname, dispatch, isOpen]);
 
     return ReactDOM.createPortal(
         <>
